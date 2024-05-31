@@ -1,0 +1,7 @@
+{
+    "Account": "Account",
+    "ChatView": {
+        "placeholder": "Enter your message..",
+        "send": "Send"
+      }
+}

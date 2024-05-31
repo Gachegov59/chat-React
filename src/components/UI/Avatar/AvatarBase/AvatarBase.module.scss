@@ -1,0 +1,38 @@
+.avatar {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	// overflow: hidden;
+	&__loader {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	img {
+		width: 100%;
+		border-radius: 100%;
+	}
+
+	&__container {
+		display: block;
+	}
+
+	&__block {
+		border: 1px solid rgba(white, 0.5);
+		border-radius: 100%;
+
+		&._default {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			// svg {
+			// 	width: 70%;
+			// 	g {
+			// 		fill: $light-blue;
+			// 	}
+			// }
+		}
+	}
+}

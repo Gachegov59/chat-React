@@ -1,0 +1,22 @@
+button {
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 6px 20px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.blue {
+    background: var(--cool-blue);
+}
+
+.blueDark {
+    background: var(--dark-five);
+    color: var(--light-blue);
+}

@@ -1,0 +1,30 @@
+:root {
+  --dark: #17212b;
+  --dark-two: #0e1621;
+  --dark-five: #1d2a39;
+  --dark-three: #242f3d;
+  --dark-four: #182533;
+
+  --white: #ffffff;
+  --blue-grey: #7f91a4;
+  --blue-dark: #28303d;
+  --bluish-grey: #7a8c9e;
+
+  --light-blue: #6ab2f2;
+  --slate: #465362;
+  --cool-blue: #5288c1;
+  --light-navy-blue: #2b5278;
+  --battleship-grey-two: #6c7883;
+
+  --phone-width: 320px;
+  --smart-width: 600px;
+  --tablet-width: 768px;
+  --small-desktop-width: 1024px;
+  --desktop-width: 1280px;
+  --wide-desktop-width: 1600px;
+
+  --transition-default: all 0.3s ease;
+  --base-font-size: 10px;
+
+  --validate-error: red;
+}

@@ -1,0 +1,26 @@
+.input {
+	input {
+		padding: 10px;
+		background: transparent;
+		border: none;
+		border-bottom: 1px solid var(--cool-blue);
+
+		&:focus {
+			outline: none;
+		}
+	}
+	.blue {
+		background-color: blue;
+		color: white;
+	}
+
+	.blueDark {
+		background-color: darkblue;
+		color: white;
+	}
+
+	.grey {
+		background-color: grey;
+		color: black;
+	}
+}

@@ -1,0 +1,42 @@
+*,
+::after,
+::before {
+	box-sizing: border-box;
+	color: var(--white);
+}
+
+html {
+	height: 100% !important;
+	font-family: 'Roboto', sans-serif;
+}
+
+#root {
+	height: 100%;
+}
+.App {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	background: var(--dark);
+	;
+}
+// todo: duplicate style !!!
+.scroll {
+	&::-webkit-scrollbar {
+		width: 2px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: var(--light-blue);
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	overflow-y: auto;
+	overflow-x: hidden;
+
+}
