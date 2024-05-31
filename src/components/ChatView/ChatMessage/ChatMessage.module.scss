@@ -1,0 +1,30 @@
+.chat-message {
+	padding-bottom: 20px;
+	max-width: 50rem;
+	&._mine {
+		margin-left: auto;
+	}
+	&__container {
+		display: flex;
+		padding: 0 5px;
+		._mine & {
+			flex-direction: row-reverse;
+		}
+	}
+	&__items {
+		display: flex;
+		flex-direction: column;
+		._mine & {
+			align-items: end;
+		}
+	}
+	&__avatar {
+		margin-right: 10px;
+		position: sticky;
+		top: 10px;
+		height: max-content;
+		._mine & {
+			margin-left: 10px;
+		}
+	}
+}

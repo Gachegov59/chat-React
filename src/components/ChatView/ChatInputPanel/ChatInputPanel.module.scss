@@ -1,0 +1,34 @@
+.chat-inputPanel {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    height: 54px;
+    background: var(--dark);
+
+    textarea {
+        background: none;
+        border: none;
+        resize: none;
+        overflow: hidden;
+        width: 100%;
+        height: 20px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__textarea {
+        flex-grow: 1;
+        align-self: flex-end;
+    }
+
+    &__help {
+        font-size: 12px;
+        color: var(--blue-grey);
+    }
+
+    &__btn {
+        height: 28px;
+    }
+}

@@ -1,0 +1,49 @@
+.menuChat-item {
+	display: flex;
+	align-items: center;
+	position: relative;
+	margin-bottom: 20px;
+	max-width: 600px;
+	&__avatar {
+		margin-right: 10px;
+	}
+	&__container {
+		flex-grow: 1;
+	}
+	&__top {
+		display: flex;
+		justify-content: space-between;
+		flex-grow: 1;
+	}
+	&__content {
+		display: flex;
+		justify-content: space-between;
+	}
+	&__name {
+		font-weight: 500;
+		color: var(--cool-blue);
+	}
+	&__text {
+		color: var(--blue-grey);
+		white-space: nowrap;
+		max-width: 150px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		padding-right: 30px;
+	}
+	&__date {
+		font-size: 10px;
+	}
+	&__counter {
+		font-size: 11px;
+		line-height: 18px;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		text-align: center;
+		width: 18px;
+		height: 18px;
+		background: var(--cool-blue);
+		border-radius: 100%;
+	}
+}

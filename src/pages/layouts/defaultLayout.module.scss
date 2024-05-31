@@ -1,0 +1,11 @@
+.default-layout {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+}
+
+.chat-page {
+	display: flex;
+	justify-content: space-between;
+	flex-grow: 1;
+}
