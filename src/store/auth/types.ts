@@ -1,8 +1,7 @@
-import { IUser } from "../../models/IUser";
+import { UserAuth } from "../../models/UserAuth";
 
-//todo перенести в models?
 export interface AuthState {
-  user: IUser | null;
+  user: UserAuth | null;
   isAuth: boolean;
   isLoading: boolean;
 }

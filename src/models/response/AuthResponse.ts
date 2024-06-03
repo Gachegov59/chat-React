@@ -1,7 +1,7 @@
-import { IUser } from "../IUser";
+import { UserAuth } from "@/models/UserAuth";
 
 export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
-  user: IUser;
+  user: UserAuth;
 }

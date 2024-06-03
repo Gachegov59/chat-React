@@ -6,8 +6,8 @@
 	height: 100vh;
 	background: var(--dark);
 	
-	@media only screen and (max-width: var(--tablet-width)) {
-		//max-width: 100px;
+	@media only screen and (max-width: 600px) {
+		max-width: 100px;
 		// display: none;
 	}
 	&__btn {

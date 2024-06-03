@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthResponse } from "../../models/response/AuthResponse";
 import { AuthState } from "./types";
 import { login, logout, registration, checkAuth } from "./authActions";
+import { AuthResponse } from "@/models/response/AuthResponse";
 
 const initialState: AuthState = {
   user: null,

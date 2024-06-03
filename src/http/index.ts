@@ -1,42 +1,39 @@
-import axios from "axios";
-import { AuthResponse } from "../models/response/AuthResponse";
-export const API_URL = import.meta.env.VITE_API_URL
+import axios from 'axios';
+import { AuthResponse } from '../models/response/AuthResponse';
+export const API_URL = import.meta.env.VITE_API_URL;
 
-const $api = axios.create({
+const axiosInstance = axios.create({
   withCredentials: true,
   baseURL: API_URL,
 });
 
-$api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+axiosInstance.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   return config;
 });
 
-$api.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (config) => {
     return config;
   },
   async (error) => {
     //save for repeat requests
     const originalRequest = error.config;
-    console.log("🚀 ~ config: originalRequest-", originalRequest)
+    console.log('🚀 ~ config: originalRequest-', originalRequest);
 
     if (error?.response?.status === 401 && !error.config._isRetry) {
       originalRequest._isRetry = true;
       try {
-        const response = await axios.get<AuthResponse>(
-          `${API_URL}/user/refresh`,
-          { withCredentials: true }
-        );
-        localStorage.setItem("token", response.data.accessToken);
+        const response = await axios.get<AuthResponse>(`${API_URL}/user/refresh`, { withCredentials: true });
+        localStorage.setItem('token', response.data.accessToken);
 
-        return $api.request(originalRequest);
+        return axiosInstance.request(originalRequest);
       } catch (error) {
-        console.log("🚀 ~ not authorized:", error);
+        console.log('🚀 ~ not authorized:', error);
       }
     }
 
     throw error;
   }
 );
-export default $api;
+export default axiosInstance;

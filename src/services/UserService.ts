@@ -1,9 +1,9 @@
-import $api from "../http";
+import axiosInstance from "../http";
 import {AxiosResponse} from "axios";
-import { IUser } from "../models/IUser";
+import { UserAuth } from "../models/UserAuth";
 
 export default class UserService {
-    static fetchUsers(): Promise<AxiosResponse<IUser[]>> {
-        return $api.get<IUser[]>('user/users')
+    static fetchUsers(): Promise<AxiosResponse<UserAuth[]>> {
+        return axiosInstance.get<UserAuth[]>('user/users')
     }
 }
