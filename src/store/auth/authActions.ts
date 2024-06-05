@@ -37,7 +37,7 @@ export const registration = createAsyncThunk(
   async ({ email, password }: RegistrationParams, { rejectWithValue }) => {
     try {
       const response = await AuthService.registration(email, password);
-      console.log('🚀 ~ response:', response);
+      console.log('🚀 ~registration response:', response);
       localStorage.setItem('token', response.data.accessToken);
       notify(JSON.stringify(response.data));
       return response.data;
@@ -54,14 +54,14 @@ export const checkAuth = createAsyncThunk('auth/checkAuth', async (_, { rejectWi
     const response = await axios.get<AuthResponse>(`${API_URL}/user/refresh`, {
       withCredentials: true,
     });
-    console.log('🚀 ~ response:--', response);
+    console.log('🚀 ~checkAuth response:--', response);
     localStorage.setItem('token', response.data.accessToken);
     return response.data;
   } catch (error: unknown) {
     const axiosError = error as AxiosError;
+
+    // localStorage.removeItem('token'); ?
+    localStorage.removeItem('token'); 
     return rejectWithValue(axiosError.response?.data);
-  } finally {
-    // this.setLoading(false);
-    // state.isLoading = false;
-  }
+  } 
 });

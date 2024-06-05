@@ -1,22 +1,17 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthState } from "./types";
-import { login, logout, registration, checkAuth } from "./authActions";
-import { AuthResponse } from "@/models/response/AuthResponse";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AuthResponse } from '@/models/response/AuthResponse';
+import { login, logout, registration, checkAuth } from './authActions';
+import { AuthState } from './types';
 
 const initialState: AuthState = {
   user: null,
   isAuth: false,
-  isLoading: false,
+  isLoading: true,
+  initialized: false,
 };
 
-const authSuccess = (state: AuthState, action: PayloadAction<AuthResponse>) => {
-  state.user = action.payload.user;
-  state.isAuth = true;
-  state.isLoading = false;
-};
-
-export const authSlice = createSlice({
-  name: "auth",
+const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -25,39 +20,51 @@ export const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(login.fulfilled, authSuccess)
+      .addCase(login.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
+        state.user = action.payload.user;
+        state.isAuth = true;
+        state.isLoading = false;
+        state.initialized = true;
+      })
       .addCase(login.rejected, (state) => {
         state.isLoading = false;
+        state.initialized = true;
       })
       // LOGOUT
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
         state.isAuth = false;
+        state.initialized = true;
       })
       // REGISTRATION
       .addCase(registration.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(registration.fulfilled, authSuccess)
+      .addCase(registration.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
+        state.user = action.payload.user;
+        state.isAuth = true;
+        state.isLoading = false;
+        state.initialized = true;
+      })
       .addCase(registration.rejected, (state) => {
         state.isLoading = false;
+        state.initialized = true;
       })
       // CHECK_AUTH
       .addCase(checkAuth.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(
-        checkAuth.fulfilled,
-        (state, action: PayloadAction<AuthResponse>) => {
-          state.user = action.payload.user;
-          state.isAuth = true;
-          state.isLoading = false;
-        }
-      )
-      .addCase(checkAuth.rejected, (state) => {
+      .addCase(checkAuth.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
+        state.user = action.payload.user;
+        state.isAuth = true;
         state.isLoading = false;
+        state.initialized = true;
+      })
+      .addCase(checkAuth.rejected, (state) => {
+        state.isAuth = false;  
+        state.isLoading = false;
+        state.initialized = true;
       });
-    // .addCase(checkAuth.finally)
   },
 });
 

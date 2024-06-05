@@ -1,17 +1,16 @@
 .form-group {
   display: block;
-}
-p {
-  color: var(--validate-error);
-}
-
-p::before {
-  padding: 5px;
-  display: inline;
-  content: '⚠ ';
-}
-
-.auth-form {
-  display: block;
-  max-width: 600px;margin: auto;
+  p {
+    color: var(--validate-error);
+  }
+  p::before {
+    padding: 5px;
+    display: inline;
+    content: '⚠ ';
+  }
+  .auth-form {
+    display: block;
+    max-width: 600px;
+    margin: auto;
+  }
 }

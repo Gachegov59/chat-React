@@ -1,14 +1,14 @@
 import { FC } from 'react';
-import DefaultLayout from '../pages/layouts/DefaultLayout';
+import ChatLayout from './layouts/ChatLayout';
 import ChatView from '../components/ChatView';
 import MenuBase from '../components/Menu/MenuBase/MenuBase';
 import { menuChats } from '../components/Menu/MenuBase/menuChatsMock';
 const PageAuth: FC = () => {
   return (
-    <DefaultLayout>
+    <ChatLayout>
       <MenuBase menuChats={menuChats}></MenuBase>
       <ChatView  />
-    </DefaultLayout>
+    </ChatLayout>
   );
 };
 

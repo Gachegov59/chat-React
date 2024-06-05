@@ -35,6 +35,9 @@ const Auth: FC = () => {
   });
 
   const dispatch = useAppDispatch();
+  const { isAuth, isLoading } = useAppSelector((state) => state.auth);
+  const [users, setUsers] = useState<UserAuth[]>([]);
+
   const registrationHendler: SubmitHandler<AuthFormValues> = (data) => {
     dispatch(registration({ ...data }));
   };
@@ -43,8 +46,7 @@ const Auth: FC = () => {
     dispatch(login({ ...data }));
   };
 
-  const { isAuth, isLoading } = useAppSelector((state) => state.auth);
-  const [users, setUsers] = useState<UserAuth[]>([]);
+  //todo: temporarly for test
   async function getUsers() {
     try {
       const response = await UserService.fetchUsers();
@@ -52,17 +54,12 @@ const Auth: FC = () => {
     } catch (error) {}
   }
 
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      dispatch(checkAuth());
-    }
-  }, [dispatch]);
-
   type formFields = {
     name: keyof AuthFormValues;
     label: string;
     type: string;
     placeholder: string;
+    autoComplete: string;
     validation: Record<string, any>;
   };
   const formFields: formFields[] = [
@@ -71,6 +68,7 @@ const Auth: FC = () => {
       label: 'Email',
       type: 'text',
       placeholder: 'Enter username',
+      autoComplete: 'username',
       validation: { required: 'Email is required' },
     },
     {
@@ -78,13 +76,14 @@ const Auth: FC = () => {
       label: 'Password',
       type: 'password',
       placeholder: 'Enter password',
+      autoComplete: 'current-password',
       validation: { required: 'Password is required' },
     },
   ];
 
   return (
     <>
-      <form className={styles['auth-form']}>
+      <form className={styles['auth-form']} autoComplete="on">
         {formFields.map((field) => (
           <FormGroup key={field.name} label={field.label} error={errors[field.name]?.message}>
             <Controller
@@ -93,9 +92,11 @@ const Auth: FC = () => {
               rules={field.validation}
               render={({ field: controllerField }) => (
                 <InputBase
+                  id={field.name}
                   placeholder={field.placeholder}
                   type={field.type}
                   color={IInputColors.grey}
+                  autoComplete={field.autoComplete}
                   onInputChange={controllerField.onChange}
                   value={controllerField.value}
                 />
@@ -103,22 +104,22 @@ const Auth: FC = () => {
             />
           </FormGroup>
         ))}
-        <div className="flex">
+        <div className="flex flex-wrap">
           <BtnBase
             btnText="registration"
-            className="bg-teal-500 mt-7 text-2xl"
+            className="bg-teal-500 mt-7 text-2xl mr-7"
             btnColor={IBtnColors.Blue}
             clickBtn={handleSubmit(registrationHendler)}
           />
           <BtnBase
             btnText="login"
-            className="bg-teal-500 mt-7 text-2xl mx-8"
+            className="bg-teal-500 mt-7 text-2xl mr-7"
             btnColor={IBtnColors.Blue}
             clickBtn={handleSubmit(loginHendler)}
           />
           <BtnBase
             btnText="logout"
-            className="bg-teal-500 mt-7 text-2xl mx-8"
+            className="bg-teal-500 mt-7 text-2xl mr-7"
             btnColor={IBtnColors.Blue}
             clickBtn={() => dispatch(logout())}
           />
