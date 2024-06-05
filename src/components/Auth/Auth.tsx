@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import styles from './Auth.module.css';
+import styles from './Auth.module.scss';
 import InputBase from '../UI/Input/InputBase/InputBase';
 import { IInputColors } from '../UI/Input/IInput';
 import BtnBase from '../UI/Button/BtnBase/BtnBase';
@@ -81,7 +81,7 @@ const Auth: FC = () => {
   ];
 
   return (
-    <>
+    <div className={styles['auth-form']}>
       <form className={styles['auth-form']} autoComplete="on">
         {formFields.map((field) => (
           <FormGroup key={field.name} label={field.label} error={errors[field.name]?.message}>
@@ -128,7 +128,7 @@ const Auth: FC = () => {
               className="bg-white border-2 text-teal-500 mt-7 text-2xl ml-auto "
               btnColor={IBtnColors.Blue}
             >
-              <Link to="/chat">Chat</Link>
+              <Link to="/">Chat</Link>
             </BtnBase>
           ) : (
             ''
@@ -150,7 +150,7 @@ const Auth: FC = () => {
       ) : (
         isLoading && <LoaderSpinner size={100}></LoaderSpinner>
       )}
-    </>
+    </div>
   );
 };
 
