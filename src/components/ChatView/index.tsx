@@ -7,8 +7,8 @@ import ChatViewPagination from './ChatViewPagination/ChatViewPagination';
 import ChatInputPanel from './ChatInputPanel/ChatInputPanel';
 
 const ChatView: FC = () => {
-  const [loaded, setLoaded] = useState<boolean>(true);
-  const [currentChat, setCurrentChat] = useState<ICurrentChat>(currentChatAPI);
+  const [loaded] = useState<boolean>(true);
+  const [currentChat] = useState<ICurrentChat>(currentChatAPI);
   const [message, setMessage] = useState<string>('');
   const clickChatBtn = () => {
     console.log('clickChatBtn');

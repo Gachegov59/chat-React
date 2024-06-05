@@ -1,4 +1,4 @@
-import { IPagination } from "./IPagination";
+// import { IPagination } from "./IPagination";
 import { IUser } from "./IUser";
 
 interface userMember {

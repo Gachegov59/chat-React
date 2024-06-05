@@ -8,7 +8,11 @@
 	margin-bottom: 20px;
 	max-width: 600px;
 	background: var(--blue);
-
+	transition: all	0.3s ease;
+	cursor: pointer;
+	&:hover {
+		opacity: 0.5;
+	}
 	@media only screen and (max-width: 600px) {
 		flex-direction: column;
 		align-items: baseline;

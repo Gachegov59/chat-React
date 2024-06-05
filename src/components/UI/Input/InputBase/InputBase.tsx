@@ -9,10 +9,24 @@ interface InputBaseProps {
   value?: string;
   type?: string;
   id?: string;
+  name?: string;
+  autoComplete?: string;
 }
 
 const InputBase = forwardRef<HTMLInputElement, InputBaseProps>(
-  ({ placeholder: inputTextPlaceholder, color = IInputColors.blue, onInputChange, value, type = 'text', id }, ref) => {
+  (
+    {
+      placeholder: inputTextPlaceholder,
+      color = IInputColors.blue,
+      onInputChange,
+      value,
+      type = 'text',
+      id,
+      name,
+      autoComplete,
+    },
+    ref
+  ) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       onInputChange(e.target.value);
     };
@@ -21,6 +35,8 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps>(
       <div className={`${styles.input} ${styles[color]}`}>
         <input
           id={id}
+          name={name}
+          autoComplete={autoComplete}
           placeholder={inputTextPlaceholder}
           type={type}
           value={value}

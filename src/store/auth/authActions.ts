@@ -5,7 +5,6 @@ import axios, { AxiosError } from 'axios';
 import { API_URL } from '@/http';
 import { AuthResponse } from '@/models/response/AuthResponse';
 import toast from 'react-hot-toast';
-import { json } from 'stream/consumers';
 
 const notify = (data: string) => toast(data);
 

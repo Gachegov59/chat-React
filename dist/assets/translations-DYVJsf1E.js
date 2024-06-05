@@ -1,0 +1,1 @@
+const t="Account",o={placeholder:"Enter your message..",send:"Send"},n={email:"Email",password:"Password",btn:{login:"Login",registration:"Registration",logout:"Logout"}},s={Account:t,ChatView:o,Auth:n};export{t as Account,n as Auth,o as ChatView,s as default};

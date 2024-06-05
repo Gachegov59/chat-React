@@ -1,4 +1,3 @@
-import LoaderSpinner from '@/components/UI/Loader/LoaderSpinner/LoaderSpinner';
 import { useAppSelector } from '@/hooks/redux';
 import PageLoading from '@/pages/PageLoading';
 import { FC } from 'react';
