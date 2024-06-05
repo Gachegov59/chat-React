@@ -37,6 +37,7 @@
 		//top: 80px;
 		bottom: 0;
 		transition: var(--transition-default);
+		z-index: 5;
 		& ._position-right {
 			button {
 				margin-left: auto;

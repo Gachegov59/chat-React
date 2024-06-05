@@ -1,44 +1,31 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import HttpApi from 'i18next-http-backend';
+import enTranslations from './locales/en/translations.json';
+import ruTranslations from './locales/ru/translations.json';
+import iwTranslations from './locales/iw/translations.json';
 
-//todo: implement in backend
-// src/loadResources.ts
-export async function loadResources() {
-  const resources = {
-    en: {
-      translation: await import('./locales/en/translations.json'),
+const resources = {
+  en: {
+    translation: enTranslations,
+  },
+  ru: {
+    translation: ruTranslations,
+  },
+  iw: {
+    translation: iwTranslations,
+  },
+};
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources,
+    lng: 'en',
+    debug: false,
+    interpolation: {
+      escapeValue: false,
     },
-    ru: {
-      translation: await import('./locales/ru/translations.json'),
-    },
-    iw: {
-      translation: await import('./locales/iw/translations.json'),
-    },
-  };
-  return resources;
-}
-
-
-async function initializeI18n() {
-  const resources = await loadResources();
-
-  i18n
-    .use(HttpApi)
-    .use(initReactI18next)
-    .init({
-      resources,
-      lng: 'en',
-      debug: true,
-      interpolation: {
-        escapeValue: false,
-      },
-      // backend: {
-      //   loadPath: "/locales/{{lng}}/{{ns}}.json",
-      // },
-    });
-}
-
-initializeI18n();
+    fallbackLng: 'en', // Fallback language if a translation is missing
+  });
 
 export default i18n;

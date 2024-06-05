@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import styles from './Auth.module.scss';
 import InputBase from '../UI/Input/InputBase/InputBase';
@@ -8,10 +8,8 @@ import { IBtnColors } from '../UI/Button/BtnBase/IBtn';
 import FormGroup from './FormGroup/FormGroup';
 import { login, logout, registration } from '@/store/auth/authActions';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import UserService from '@/services/UserService';
 import { Link } from 'react-router-dom';
-import { UserAuth } from '@/models/UserAuth';
-import LoaderSpinner from '../UI/Loader/LoaderSpinner/LoaderSpinner';
+import { useNavigate } from 'react-router-dom';
 // import { t } from 'i18next';
 // import toast from 'react-hot-toast';
 // const notify = (data: string) => toast(data);
@@ -34,8 +32,8 @@ const Auth: FC = () => {
   });
 
   const dispatch = useAppDispatch();
-  const { isAuth, isLoading } = useAppSelector((state) => state.auth);
-  const [users, setUsers] = useState<UserAuth[]>([]);
+  const { isAuth } = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const registrationHendler: SubmitHandler<AuthFormValues> = (data) => {
     dispatch(registration({ ...data }));
@@ -43,15 +41,8 @@ const Auth: FC = () => {
 
   const loginHendler: SubmitHandler<AuthFormValues> = (data) => {
     dispatch(login({ ...data }));
+    navigate('/');
   };
-
-  //todo: temporarly for test
-  async function getUsers() {
-    try {
-      const response = await UserService.fetchUsers();
-      setUsers(response.data);
-    } catch (error) {}
-  }
 
   type formFields = {
     name: keyof AuthFormValues;
@@ -110,18 +101,22 @@ const Auth: FC = () => {
             btnColor={IBtnColors.Blue}
             clickBtn={handleSubmit(registrationHendler)}
           />
-          <BtnBase
-            btnText="login"
-            className="bg-teal-500 mt-7 text-2xl mr-7"
-            btnColor={IBtnColors.Blue}
-            clickBtn={handleSubmit(loginHendler)}
-          />
-          <BtnBase
-            btnText="logout"
-            className="bg-teal-500 mt-7 text-2xl mr-7"
-            btnColor={IBtnColors.Blue}
-            clickBtn={() => dispatch(logout())}
-          />
+          {isAuth ? (
+            <BtnBase
+              btnText="logout"
+              className="bg-teal-500 mt-7 text-2xl mr-7"
+              btnColor={IBtnColors.Blue}
+              clickBtn={() => dispatch(logout())}
+            />
+          ) : (
+            <BtnBase
+              btnText="login"
+              className="bg-teal-500 mt-7 text-2xl mr-7"
+              btnColor={IBtnColors.Blue}
+              clickBtn={handleSubmit(loginHendler)}
+            />
+          )}
+
           {isAuth ? (
             <BtnBase
               btnText="Chat"
@@ -135,21 +130,6 @@ const Auth: FC = () => {
           )}
         </div>
       </form>
-      {isAuth ? (
-        <>
-          <BtnBase
-            btnText="getUsers"
-            className="bg-white border-2 text-teal-500 mt-7 text-2xl"
-            btnColor={IBtnColors.BlueDark}
-            clickBtn={getUsers}
-          />
-          {users.map((user) => (
-            <div key={user.email}>{user.email}</div>
-          ))}
-        </>
-      ) : (
-        isLoading && <LoaderSpinner size={100}></LoaderSpinner>
-      )}
     </div>
   );
 };

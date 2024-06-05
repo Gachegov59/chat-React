@@ -11,7 +11,6 @@ const ChatView: FC = () => {
   const [currentChat] = useState<ICurrentChat>(currentChatAPI);
   const [message, setMessage] = useState<string>('');
   const clickChatBtn = () => {
-    console.log('clickChatBtn');
     setMessage('');
   };
 
