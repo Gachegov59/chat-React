@@ -5,7 +5,7 @@ type obejctString = {
 class Endpoints {
   USER: obejctString = {
     USERS_BASE_ROUTE: "/user",
-    REGISTERATION: "/registration",
+    REGISTRATION: "/registration",
     LOGIN: "/login",
     LOGOUT: "/logout",
     ACTIVATE_LINK: "/activate/:link",

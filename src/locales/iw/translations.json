@@ -3,5 +3,14 @@
   "ChatView": {
     "placeholder": "הכנס את ההודעה שלך..",
     "send": "שלח"
+  },
+  "Auth": {
+    "email": "דואר אלקטרוני",
+    "password": "סיסמה",
+    "btn": {
+      "login": "התחברות",
+      "registration": "הרשמה",
+      "logout": "התנתקות"
+    }
   }
 }

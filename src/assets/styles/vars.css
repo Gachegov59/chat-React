@@ -26,5 +26,5 @@
   --transition-default: all 0.3s ease;
   --base-font-size: 10px;
 
-  --validate-error: red;
+  --validate-error: #bf1650;
 }

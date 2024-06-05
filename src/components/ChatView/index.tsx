@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import styles from './index.module.scss';
 import LoaderSpinner from '../UI/Loader/LoaderSpinner/LoaderSpinner';
-import { currentChatAPI } from './CurrentChatMock';
+import { currentChatAPI } from './chatMock';
 import { ICurrentChat } from '../../interfaces/IChat';
 import ChatViewPagination from './ChatViewPagination/ChatViewPagination';
 import ChatInputPanel from './ChatInputPanel/ChatInputPanel';
@@ -26,11 +26,7 @@ const ChatView: FC = () => {
         )}
         <ChatViewPagination currentChat={currentChat} />
       </div>
-      <div className={styles['chat-view__textarea-pannel']}>
-        <div className={styles['chat-view__textarea']}>
-          <ChatInputPanel message={message} setMessage={setMessage} clickChatBtn={clickChatBtn} />
-        </div>
-      </div>
+      <ChatInputPanel message={message} setMessage={setMessage} clickChatBtn={clickChatBtn} />
     </div>
   );
 };

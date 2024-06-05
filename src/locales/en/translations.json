@@ -1,7 +1,16 @@
 {
-    "Account": "Account",
-    "ChatView": {
-        "placeholder": "Enter your message..",
-        "send": "Send"
-      }
+  "Account": "Account",
+  "ChatView": {
+    "placeholder": "Enter your message..",
+    "send": "Send"
+  },
+  "Auth": {
+    "email": "Email",
+    "password": "Password",
+    "btn": {
+      "login": "Login",
+      "registration": "Registration",
+      "logout": "Logout"
+    }
+  }
 }

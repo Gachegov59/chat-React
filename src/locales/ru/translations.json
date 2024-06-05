@@ -3,5 +3,14 @@
   "ChatView": {
     "placeholder": "Введите сообщение..",
     "send": "Отправить"
+  },
+  "Auth": {
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "btn": {
+      "login": "Войти",
+      "registration": "Регистрация",
+      "logout": "Выйти"
+    }
   }
 }

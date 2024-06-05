@@ -2,16 +2,22 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { LoginParams, RegistrationParams } from './types';
 import AuthService from '../../services/AuthService';
 import axios, { AxiosError } from 'axios';
-import { AuthResponse } from '../../models/response/AuthResponse';
-import { API_URL } from '../../http';
+import { API_URL } from '@/http';
+import { AuthResponse } from '@/models/response/AuthResponse';
+import toast from 'react-hot-toast';
+import { json } from 'stream/consumers';
+
+const notify = (data: string) => toast(data);
 
 export const login = createAsyncThunk('auth/login', async ({ email, password }: LoginParams, { rejectWithValue }) => {
   try {
     const response = await AuthService.login(email, password);
     localStorage.setItem('token', response.data.accessToken);
+    notify(JSON.stringify(response.data));
     return response.data;
   } catch (error: unknown) {
     const axiosError = error as AxiosError;
+    notify(JSON.stringify(axiosError.response?.data));
     return rejectWithValue(axiosError.response?.data);
   }
 });
@@ -31,29 +37,31 @@ export const registration = createAsyncThunk(
   async ({ email, password }: RegistrationParams, { rejectWithValue }) => {
     try {
       const response = await AuthService.registration(email, password);
+      console.log('🚀 ~registration response:', response);
       localStorage.setItem('token', response.data.accessToken);
+      notify(JSON.stringify(response.data));
       return response.data;
     } catch (error: unknown) {
       const axiosError = error as AxiosError;
+      notify(JSON.stringify(axiosError.response?.data));
       return rejectWithValue(axiosError.response?.data);
     }
   }
 );
 
-//todoL перенести в AuthService ?
 export const checkAuth = createAsyncThunk('auth/checkAuth', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get<AuthResponse>(`${API_URL}/user/refresh`, {
       withCredentials: true,
     });
-    console.log('🚀 ~ response:--', response);
+    console.log('🚀 ~checkAuth response:--', response);
     localStorage.setItem('token', response.data.accessToken);
     return response.data;
   } catch (error: unknown) {
     const axiosError = error as AxiosError;
+
+    // localStorage.removeItem('token'); ?
+    localStorage.removeItem('token'); 
     return rejectWithValue(axiosError.response?.data);
-  } finally {
-    // this.setLoading(false);
-    // state.isLoading = false;
-  }
+  } 
 });

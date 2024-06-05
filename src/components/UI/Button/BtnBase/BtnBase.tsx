@@ -6,12 +6,13 @@ interface BtnBaseProps {
   btnText: string;
   btnColor: IBtnColors;
   children?: ReactNode;
-  clickBtn: () => void;
+  className?: string;
+  clickBtn?: () => void;
 }
 
-const BtnBase: FC<BtnBaseProps> = ({ btnText, btnColor = IBtnColors.Blue, children, clickBtn }) => {
+const BtnBase: FC<BtnBaseProps> = ({className = '', btnText, btnColor = IBtnColors.Blue, children, clickBtn }) => {
   return (
-    <button className={styles[btnColor]} onClick={clickBtn}>
+    <button className={`${styles.button} ${className} ${styles[btnColor]}`} onClick={clickBtn}>
       {children || btnText}
     </button>
   );

@@ -1,10 +1,10 @@
-import { IUser } from "../../models/IUser";
+import { UserAuth } from "../../models/UserAuth";
 
-//todo перенести в models?
 export interface AuthState {
-  user: IUser | null;
+  user: UserAuth | null;
   isAuth: boolean;
   isLoading: boolean;
+  initialized: boolean;
 }
 export type RegistrationParams = { email: string; password: string };
 export type LoginParams = { email: string; password: string };
