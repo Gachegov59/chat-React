@@ -3,7 +3,6 @@ import styles from './ChatInputPanel.module.scss';
 import BtnBase from '@/components/UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '@/components/UI/Button/BtnBase/IBtn';
 import { useTranslation } from 'react-i18next';
-import { t } from 'i18next';
 interface ChatInputPanelProps {
   message: string;
   setMessage: (message: string) => void;
