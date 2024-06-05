@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import styles from './Auth.module.css';
 import InputBase from '../UI/Input/InputBase/InputBase';
@@ -6,7 +6,7 @@ import { IInputColors } from '../UI/Input/IInput';
 import BtnBase from '../UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '../UI/Button/BtnBase/IBtn';
 import FormGroup from './FormGroup/FormGroup';
-import { checkAuth, login, logout, registration } from '@/store/auth/authActions';
+import { login, logout, registration } from '@/store/auth/authActions';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import UserService from '@/services/UserService';
 import { Link } from 'react-router-dom';
@@ -25,7 +25,6 @@ const Auth: FC = () => {
   const {
     control,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<AuthFormValues>({
     defaultValues: {

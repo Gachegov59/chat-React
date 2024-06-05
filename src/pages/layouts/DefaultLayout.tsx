@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import styles from './layouts.module.scss';
+// import styles from './layouts.module.scss';
 interface DefaultLayoutProps {
   children: ReactNode;
   classNameContainer?: string;

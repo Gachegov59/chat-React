@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import Container from '@/components/UI/Container/Container';
-import Auth from '@/components/Auth/Auth';
 import DefaultLayout from './layouts/DefaultLayout';
 import LoaderSpinner from '@/components/UI/Loader/LoaderSpinner/LoaderSpinner';
 

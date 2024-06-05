@@ -1,0 +1,1 @@
+const t="חשבון",o={placeholder:"הכנס את ההודעה שלך..",send:"שלח"},n={email:"דואר אלקטרוני",password:"סיסמה",btn:{login:"התחברות",registration:"הרשמה",logout:"התנתקות"}},s={Account:t,ChatView:o,Auth:n};export{t as Account,n as Auth,o as ChatView,s as default};

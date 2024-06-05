@@ -3,10 +3,12 @@ import styles from './MenuBase.module.scss';
 import BtnBurger from '../../UI/Button/BtnBurger/BtnBurger';
 import BtnBase from '../../UI/Button/BtnBase/BtnBase';
 import { IMenuChat } from '../../../interfaces/IMenu';
-import AuthModal from '../../Modals/AuthModal/AuthModal';
 import MenuChat from '../MenuChat/MenuChat';
 import { useTranslation } from 'react-i18next';
 import { IBtnColors } from '../../UI/Button/BtnBase/IBtn';
+import { logout } from '@/store/auth/authActions';
+import { useAppDispatch } from '@/hooks/redux';
+import AccountModal from '@/components/Modals/AccountModal/AccountModal';
 
 interface MenuBaseProps {
   menuChats: IMenuChat[];
@@ -14,8 +16,9 @@ interface MenuBaseProps {
 
 const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [isShowAuthModal, setIsShowAuthModal] = useState<boolean>(false);
-
+  const [isShowAccountModal, setIsShowAccountModal] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  
   const clickBtnBurger = () => {
     setIsMenuOpen(!isMenuOpen);
     switсhKeyListener();
@@ -31,10 +34,13 @@ const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
   }, []);
 
   const closeAuthModal = () => {
-    setIsShowAuthModal(false);
+    setIsShowAccountModal(false);
   };
 
-  const openAuthModal = () => setIsShowAuthModal(true);
+  const openAuthModal = () => {
+    console.log(12313)
+    setIsShowAccountModal(true)
+  };
 
   const { t, i18n } = useTranslation();
   const changeLng = (lng: 'en' | 'ru' | 'iw') => {
@@ -61,18 +67,19 @@ const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
           <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={openAuthModal} btnText="Войти">
             {t('Account')}
           </BtnBase>
+          <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={() => dispatch(logout())} btnText="Logout" />
         </div>
+
+        {/* remove languages in new component */}
         <div className={styles['menu-base__btn']}>
-          <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={() => changeLng('en')} btnText={t('RU')}>
-            {t('EN')}
-          </BtnBase>
-          <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={() => changeLng('ru')} btnText={t('RU')}></BtnBase>
-          <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={() => changeLng('iw')} btnText={t('HE')}></BtnBase>
+          <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={() => changeLng('en')} btnText="EN" />
+          <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={() => changeLng('ru')} btnText="RU" />
+          <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={() => changeLng('iw')} btnText="HE" />
         </div>
       </div>
 
       <div className={styles['menu-base__modal']}>
-        <AuthModal isShowAuthModal={isShowAuthModal} closeAuthModal={closeAuthModal} />
+        <AccountModal isShowAccountModal={isShowAccountModal} closeAccountModal={closeAuthModal} />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import Container from '@/components/UI/Container/Container';
 import Title, { TitleSize } from '@/components/UI/Title/Title';
 import DefaultLayout from '../layouts/DefaultLayout';
