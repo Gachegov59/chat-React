@@ -7,11 +7,11 @@ import { useAppDispatch } from './hooks/redux';
 const App: FC = () => {
   const dispatch = useAppDispatch();
 
+  //todo: refactor
   useEffect(() => {
     if (localStorage.getItem('token')) {
       dispatch(checkAuth());
     } else {
-      // Manually set initialized to true if there's no token
       dispatch({ type: 'auth/checkAuth/rejected' });
     }
   }, [dispatch]);

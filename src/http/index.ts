@@ -19,7 +19,6 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     //save for repeat requests
     const originalRequest = error.config;
-    console.log('🚀 ~ config: originalRequest-', originalRequest);
 
     if (error?.response?.status === 401 && !error.config._isRetry) {
       originalRequest._isRetry = true;

@@ -8,16 +8,19 @@ interface GuardRouteProps {
 }
 
 const GuardRoute: FC<GuardRouteProps> = ({ children }) => {
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuth);
-  const isLoading = useAppSelector((state) => state.auth.isLoading);
-  const initialized = useAppSelector((state) => state.auth.initialized);
+  const {isAuth} = useAppSelector((state) => state.auth);
+  console.log("🚀 ~ isAuth:", isAuth)
+  const { isLoading } = useAppSelector((state) => state.auth);
+  console.log("🚀 ~ isLoading:", isLoading)
 
-  if (isLoading || !initialized) {
-    // return <LoaderSpinner size={100} />;
+  // if (isLoading || !initialized) {
+  //   return <PageLoading />;
+  // }
+  if (isLoading) {
     return <PageLoading />;
   }
 
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuth ? children : <Navigate to="/login" />;
 };
 
 export default GuardRoute;
