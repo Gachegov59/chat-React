@@ -9,13 +9,8 @@ interface GuardRouteProps {
 
 const GuardRoute: FC<GuardRouteProps> = ({ children }) => {
   const {isAuth} = useAppSelector((state) => state.auth);
-  console.log("🚀 ~ isAuth:", isAuth)
   const { isLoading } = useAppSelector((state) => state.auth);
-  console.log("🚀 ~ isLoading:", isLoading)
 
-  // if (isLoading || !initialized) {
-  //   return <PageLoading />;
-  // }
   if (isLoading) {
     return <PageLoading />;
   }
