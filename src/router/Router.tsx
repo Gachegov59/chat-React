@@ -9,7 +9,7 @@ export const AppRouter: FC = () => {
   return (
     <Routes>
       <Route
-        path="/chat"
+        path="/"
         element={
           <GuardRoute>
             <PageChat />
