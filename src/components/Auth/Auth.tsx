@@ -36,6 +36,7 @@ const Auth: FC = () => {
 
   const loginHandler: SubmitHandler<LoginFormValues> = (data) => {
     dispatch(login({ ...data }));
+    console.log("🚀 ~ RoutesСonstant.BASE:", RoutesСonstant.BASE)
     navigate(RoutesСonstant.BASE);
   };
 

@@ -40,7 +40,6 @@ const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
     !isMenuOpen ? window.addEventListener('keydown', onKeyDown) : window.removeEventListener('keydown', onKeyDown);
   };
   const onKeyDown = useCallback((event: KeyboardEvent) => {
-    console.log(213)
     if (event.key === 'Escape') {
       setIsMenuOpen(false);
       window.removeEventListener('keydown', onKeyDown);

@@ -2,20 +2,22 @@ import { FC, useEffect } from 'react';
 import { AppRouter } from './router/Router';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { checkAuth } from './store/auth/authActions';
-import { useAppDispatch } from './hooks/redux';
+import { useAppDispatch, useAppSelector } from './hooks/redux';
+import PageLoading from './pages/PageLoading';
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
+  const { isAuth, isLoading } = useAppSelector((state) => state.auth);
 
-  //todo: refactor
   useEffect(() => {
     if (localStorage.getItem('token')) {
       dispatch(checkAuth());
-    } else {
-      dispatch({ type: 'auth/checkAuth/rejected' });
     }
-  }, [dispatch]);
-
+  }, []);
+  if (isLoading) {
+    return <PageLoading />;
+  }
+  console.log('isAuth', isAuth);
   return (
     <div className="App">
       <Router>

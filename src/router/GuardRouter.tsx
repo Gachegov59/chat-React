@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/hooks/redux';
 import PageLoading from '@/pages/PageLoading';
-import { FC } from 'react';
+import { useEffect, FC, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 interface GuardRouteProps {
@@ -8,14 +8,23 @@ interface GuardRouteProps {
 }
 
 const GuardRoute: FC<GuardRouteProps> = ({ children }) => {
-  const {isAuth} = useAppSelector((state) => state.auth);
-  const { isLoading } = useAppSelector((state) => state.auth);
+  const { isAuth, initialState } = useAppSelector((state) => state.auth);
+  const [isAccess, setIsAccess] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  console.log('GuardRoute-');
+  useEffect(() => {
+    if (initialState) {
+      const isAccessCheck = initialState && isAuth;
+      setIsAccess(isAccessCheck);
+      setLoading(false);
+    }
+  }, [isAuth, initialState]);
 
-  if (isLoading) {
+  if (loading) {
     return <PageLoading />;
+  } else {
+    return isAccess ? children : <Navigate to="/login" />;
   }
-
-  return isAuth ? children : <Navigate to="/login" />;
 };
 
 export default GuardRoute;

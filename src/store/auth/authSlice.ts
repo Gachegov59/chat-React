@@ -6,7 +6,8 @@ import { AuthState } from './types';
 const initialState: AuthState = {
   user: null,
   isAuth: false,
-  isLoading: true,
+  isLoading: false,
+  initialState: false
 };
 
 const authSlice = createSlice({
@@ -27,23 +28,25 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state) => {
         state.isLoading = false;
       })
+
       // LOGOUT
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
         state.isAuth = false;
       })
+
       // REGISTRATION
       .addCase(registration.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(registration.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
         state.user = action.payload.user;
-        state.isAuth = true;
         state.isLoading = false;
       })
       .addCase(registration.rejected, (state) => {
         state.isLoading = false;
       })
+      
       // CHECK_AUTH
       .addCase(checkAuth.pending, (state) => {
         state.isLoading = true;
@@ -52,10 +55,12 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.isAuth = true;
         state.isLoading = false;
+        state.initialState = true
       })
       .addCase(checkAuth.rejected, (state) => {
         state.isAuth = false;  
         state.isLoading = false;
+        state.initialState = true
       });
   },
 });

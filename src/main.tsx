@@ -11,12 +11,12 @@ import i18n from './i18n.ts';
 import { Toaster } from 'react-hot-toast';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  // <StrictMode>
     <Provider store={Store}>
       <I18nextProvider i18n={i18n}>
         <Toaster />
         <App />
       </I18nextProvider>
     </Provider>
-  </StrictMode>
+  // </StrictMode>
 );
