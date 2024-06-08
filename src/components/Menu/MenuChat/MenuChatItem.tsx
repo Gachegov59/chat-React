@@ -13,7 +13,7 @@ const getAvatarSize = (width: number): number => {
 };
 
 const MenuChatItem: FC<MenuChatProps> = ({ chat }) => {
-  const [avatarSize, setAvatarSize] = useState(getAvatarSize(window.innerWidth));
+  const [avatarSize, setAvatarSize] = useState<number>(getAvatarSize(window.innerWidth));
 
   useEffect(() => {
     const handleResize = () => {

@@ -1,0 +1,20 @@
+.form-switcher {
+    display: flex;
+    margin-bottom: 20px;
+
+    .switch-button {
+        padding: 10px 20px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        // transition: var(--transition-default);
+    }
+
+    .switch-button.active {
+        font-weight: bold;
+        border-bottom: 2px solid var(--white);
+    }
+
+}

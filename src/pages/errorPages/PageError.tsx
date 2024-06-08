@@ -6,12 +6,12 @@ import BtnBase from '@/components/UI/Button/BtnBase/BtnBase';
 import { Link } from 'react-router-dom';
 import { IBtnColors } from '@/components/UI/Button/BtnBase/IBtn';
 import { useAppSelector } from '@/hooks/redux';
-
+import RoutesСonstant from '@/router/constant';
 const containerClasses = 'flex h-screen flex-col justify-center';
 const mainClasses = 'flex text-center';
 
 const PageAuth: FC = () => {
-const { isAuth } = useAppSelector((state) => state.auth);
+  const { isAuth } = useAppSelector((state) => state.auth);
 
   return (
     <DefaultLayout classNameMain={mainClasses} classNameContainer={containerClasses}>
@@ -25,11 +25,11 @@ const { isAuth } = useAppSelector((state) => state.auth);
         <div className="flex mt-20 max-w-3xl m-auto">
           {isAuth && (
             <BtnBase
-              btnText="Chat"
+              btnText={RoutesСonstant.BASE}
               className="bg-white border-2 block text-teal-500 mt-7 text-2xl mr-5"
               btnColor={IBtnColors.Blue}
             >
-              <Link to="/chat">homepage</Link>
+              <Link to={RoutesСonstant.BASE}>homepage</Link>
             </BtnBase>
           )}
           <BtnBase
@@ -37,7 +37,7 @@ const { isAuth } = useAppSelector((state) => state.auth);
             className="bg-white border-2 block text-teal-500 mt-7 text-2xl"
             btnColor={IBtnColors.Blue}
           >
-            <Link to="/login">login page</Link>
+            <Link to={RoutesСonstant.LOGIN}>login page</Link>
           </BtnBase>
         </div>
       </Container>

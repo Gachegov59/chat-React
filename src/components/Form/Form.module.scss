@@ -1,0 +1,19 @@
+.form-group {
+  display: block;
+
+  p {
+    color: var(--validate-error);
+  }
+
+  p::before {
+    padding: 5px;
+    display: inline;
+    content: '⚠ ';
+  }
+}
+
+.form {
+  display: block;
+  max-width: 600px;
+  margin: auto;
+}

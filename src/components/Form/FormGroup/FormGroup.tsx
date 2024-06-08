@@ -9,7 +9,7 @@ interface FormGroupProps {
 const FormGroup: FC<FormGroupProps> = ({ label, error, children }) => {
   return (
     <div className={styles['form-group']}>
-      <label className="text-white text-lg">{label}</label>
+      <label className="text-white text-base">{label}</label>
       {children}
       {error && <p>{error}</p>}
     </div>

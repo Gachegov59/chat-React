@@ -11,6 +11,9 @@
       "login": "התחברות",
       "registration": "הרשמה",
       "logout": "התנתקות"
-    }
+    },
+    "logout": "התנתקות",
+    "register": "הירשם",
+    "login": "התחברות"
   }
 }

@@ -11,6 +11,9 @@
       "login": "Login",
       "registration": "Registration",
       "logout": "Logout"
-    }
+    },
+    "logout": "Logout",
+    "register": "Register",
+    "login": "Login"
   }
 }
