@@ -7,6 +7,21 @@
   "Auth": {
     "email": "דואר אלקטרוני",
     "password": "סיסמה",
+    "firstName": "שם פרטי",
+    "lastName": "שם משפחה",
+    "placeholder": {
+      "email": "הכנס דואר אלקטרוני",
+      "password": "הכנס סיסמה",
+      "firstName": "הכנס שם פרטי",
+      "lastName": "הכנס שם משפחה",
+      "username": "הכנס שם משתמש"
+    },
+    "validation": {
+      "requiredEmail": "דואר אלקטרוני הוא חובה",
+      "requiredPassword": "סיסמה היא חובה",
+      "requiredFirstName": "שם פרטי הוא חובה",
+      "requiredLastName": "שם משפחה הוא חובה"
+    },
     "btn": {
       "login": "התחברות",
       "registration": "הרשמה",

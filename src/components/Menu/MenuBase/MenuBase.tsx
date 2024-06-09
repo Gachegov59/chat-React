@@ -5,7 +5,6 @@ import BtnBase from '../../UI/Button/BtnBase/BtnBase';
 import { IMenuChat } from '../../../interfaces/IMenu';
 import MenuChat from '../MenuChat/MenuChat';
 import { IBtnColors } from '../../UI/Button/BtnBase/IBtn';
-import { logout } from '@/store/auth/authActions';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import AccountModal from '@/components/Modals/AccountModal/AccountModal';
 import { UserAuth } from '@/models/UserAuth';
@@ -22,7 +21,6 @@ const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
   const [isShowAccountModal, setIsShowAccountModal] = useState<boolean>(false);
   const [users, setUsers] = useState<UserAuth[]>([]);
   const { isAuth, isLoading } = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch();
 
   //todo: test - remove!
   async function getUsers() {
@@ -71,7 +69,7 @@ const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
             {t('Account')}
           </BtnBase>
 
-          <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={() => dispatch(logout())} btnText="Logout" />
+         
           
         </div>
 

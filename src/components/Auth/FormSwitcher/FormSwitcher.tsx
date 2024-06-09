@@ -14,13 +14,13 @@ const FormSwitcher: FC<FormSwitcherProps> = ({ isLogin, setIsLogin }) => {
         className={`${styles['switch-button']} ${isLogin ? styles['active'] : ''}`}
         onClick={() => setIsLogin(true)}
       >
-        {t('Login')}
+        {t('Auth.login')}
       </button>
       <button
         className={`${styles['switch-button']} ${!isLogin ? styles['active'] : ''}`}
         onClick={() => setIsLogin(false)}
       >
-        {t('Register')}
+        {t('Auth.register')}
       </button>
     </div>
   );

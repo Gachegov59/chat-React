@@ -5,8 +5,23 @@
     "send": "Отправить"
   },
   "Auth": {
-    "email": "Электронная почта",
+    "email": "Почта",
     "password": "Пароль",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "placeholder": {
+      "email": "Введите электронную почту",
+      "password": "Введите пароль",
+      "firstName": "Введите имя",
+      "lastName": "Введите фамилию",
+      "username": "Введите имя пользователя"
+    },
+    "validation": {
+      "requiredEmail": "Электронная почта обязательна",
+      "requiredPassword": "Пароль обязателен",
+      "requiredFirstName": "Имя обязательно",
+      "requiredLastName": "Фамилия обязательна"
+    },
     "btn": {
       "login": "Войти",
       "registration": "Регистрация",

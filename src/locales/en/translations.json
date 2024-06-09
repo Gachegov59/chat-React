@@ -7,6 +7,21 @@
   "Auth": {
     "email": "Email",
     "password": "Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "placeholder": {
+      "email": "Enter email",
+      "password": "Enter password",
+      "firstName": "Enter first name",
+      "lastName": "Enter last name",
+      "username": "Enter username"
+    },
+    "validation": {
+      "requiredEmail": "Email is required",
+      "requiredPassword": "Password is required",
+      "requiredFirstName": "First name is required",
+      "requiredLastName": "Last name is required"
+    },
     "btn": {
       "login": "Login",
       "registration": "Registration",
@@ -15,5 +30,13 @@
     "logout": "Logout",
     "register": "Register",
     "login": "Login"
+  },
+  "settings": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "save": "Save",
+    "avatar": "Avatar"
   }
 }

@@ -1,6 +1,7 @@
 import { ChangeEvent, forwardRef } from 'react';
 import styles from './InputBase.module.scss';
 import { IInputColors } from '../IInput';
+import { useTranslation } from 'react-i18next';
 
 interface InputBaseProps {
   placeholder: string;
@@ -27,6 +28,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps>(
     },
     ref
   ) => {
+    const { t } = useTranslation();
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       onInputChange(e.target.value);
     };
@@ -37,7 +39,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps>(
           id={id}
           name={name}
           autoComplete={autoComplete}
-          placeholder={inputTextPlaceholder}
+          placeholder={t(inputTextPlaceholder)}
           type={type}
           value={value}
           onChange={handleChange}

@@ -1,0 +1,15 @@
+.lanSwitcher {
+    color: var(--white);
+    background: var(--teal);
+
+    option {
+        color: var(--white);
+    }
+
+    select {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        background: var(--teal);
+    }
+}

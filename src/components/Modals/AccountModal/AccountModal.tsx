@@ -1,6 +1,13 @@
 import { FC } from 'react';
 // import styles from './AuthModal.module.scss';
 import ModalBase from '@/components/UI/Modal/ModalBase/ModalBase';
+import LanSwitcher from '@/components/LanSwitcher/LanSwitcher';
+import { useTranslation } from 'react-i18next';
+import Settings from './Settings/Settings';
+import BtnBase from '@/components/UI/Button/BtnBase/BtnBase';
+import { IBtnColors } from '@/components/UI/Button/BtnBase/IBtn';
+import { useAppDispatch } from '@/hooks/redux';
+import { logout } from '@/store/auth/authActions';
 interface AccountModalProps {
   isShowAccountModal: boolean;
   closeAccountModal: () => void;
@@ -11,21 +18,25 @@ interface AccountModalProps {
 //   surname: string;
 //   nickname: string;
 // }
-export const oldFunc = () => {}
-const AccountModal: FC<AccountModalProps> = ({ isShowAccountModal: isShowAuthModal, closeAccountModal: closeAuthModal }) => {
-  // const [setUser] = useState<User>({ name: '', surname: '', nickname: '' });
-  // const handleInputChange = (fieldName: keyof User) => (value: string) => {
-  //   console.log("🚀 ~ handleInputChange ~ value:", value)
-  //   console.log("🚀 ~ handleInputChange ~ fieldName:", fieldName)
-  //   setUser((prevUser) => ({
-  //     ...prevUser,
-  //     [fieldName]: value.trim(),
-  //   }));
-  // };
+export const oldFunc = () => {};
+const AccountModal: FC<AccountModalProps> = ({
+  isShowAccountModal: isShowAuthModal,
+  closeAccountModal: closeAuthModal,
+}) => {
 
+  const { i18n } = useTranslation();
+  const dispatch = useAppDispatch();
+  
+  const changeLanguage = (lan: string) => {
+    console.log('🚀 ~ changeLanguage ~ event.target.value:', lan);
+    i18n.changeLanguage(lan);
+  };
+  
   return (
     <ModalBase isShowModal={isShowAuthModal} closeModal={closeAuthModal}>
-      <h1> hi</h1>
+      <LanSwitcher classNames='ml-auto inline-block mb-4' changeLanguage={(e) => changeLanguage(e)} />
+      <Settings/>
+      <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={() => dispatch(logout())} btnText="Logout" />
     </ModalBase>
   );
 };

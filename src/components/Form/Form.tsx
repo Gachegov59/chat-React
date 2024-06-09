@@ -6,6 +6,7 @@ import { IInputColors } from '../UI/Input/IInput';
 import BtnBase from '../UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '../UI/Button/BtnBase/IBtn';
 import FormGroup from './FormGroup/FormGroup';
+import { useTranslation } from 'react-i18next';
 
 interface FormField {
   name: string;
@@ -28,12 +29,12 @@ const Form: FC<FormProps<any>> = ({ fields, onSubmit, submitButtonText, ...useFo
     handleSubmit,
     formState: { errors },
   } = useForm<any>(useFormProps);
-
+  const { t } = useTranslation();
   return (
     <div>
       <form className={styles['form']} autoComplete="on" onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field) => (
-          <FormGroup key={field.name} label={field.label} error={errors[field.name]?.message as string | undefined}>
+          <FormGroup key={field.name} label={t(field.label)} error={errors[field.name]?.message as string | undefined}>
             <Controller
               name={field.name}
               control={control}
@@ -52,6 +53,7 @@ const Form: FC<FormProps<any>> = ({ fields, onSubmit, submitButtonText, ...useFo
             />
           </FormGroup>
         ))}
+        {/* todo submit button change - universal */}
         <div className="flex flex-wrap">
           <BtnBase btnText={submitButtonText} className="bg-teal-500 mt-7 text-base mr-7" btnColor={IBtnColors.Blue} />
         </div>

@@ -11,7 +11,10 @@ import FormSwitcher from './FormSwitcher/FormSwitcher';
 import ConfirmationBlock from './ConfirmationBlock/ConfirmationBlock';
 import SocialLogin from './SocialLogin/SocialLogin';
 import RoutesСonstant from '@/router/constant';
-
+import LanSwitcher from '../LanSwitcher/LanSwitcher';
+import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
+// import i18n from '@/i18n';
 
 const Auth: FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -19,6 +22,7 @@ const Auth: FC = () => {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
   const registrationHandler: SubmitHandler<RegisterFormValues> = (data) => {
     console.log('🚀 ~ registrationHandler:', data);
@@ -40,9 +44,15 @@ const Auth: FC = () => {
     navigate(RoutesСonstant.BASE);
   };
 
+  const changeLanguage = (lan: string) => {
+    console.log("🚀 ~ changeLanguage ~ event.target.value:", lan)
+    i18n.changeLanguage(lan);
+  };
+
   return (
     <div className={styles['auth']}>
       <div className={styles['auth-container']}>
+        <LanSwitcher changeLanguage={(e) => changeLanguage(e)}/>
         <FormSwitcher isLogin={isLogin} setIsLogin={setIsLogin} />
 
         {isLogin ? (
