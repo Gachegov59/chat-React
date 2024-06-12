@@ -37,7 +37,7 @@ const AccountModal: FC<AccountModalProps> = ({
     <ModalBase isShowModal={isShowAuthModal} closeModal={closeAuthModal}>
       <LanSwitcher classNames='ml-auto inline-block mb-4' changeLanguage={(e) => changeLanguage(e)} />
       <Settings/>
-      <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={() => dispatch(logout())} btnText="Logout" />
+      <BtnBase className='mt-5 text-lg py- px-6' btnColor={IBtnColors.BlueDark} clickBtn={() => dispatch(logout())} btnText="Logout" />
     </ModalBase>
   );
 };

@@ -21,10 +21,10 @@ const MenuChat: FC<MenuChatProps> = ({ menuChats }) => {
         </>
       ) : (
         <div className={styles['chat-placeholder']}>
-          <Title size={TitleSize.H1} className="text-xl sm:text-xl lg:text-2xl p-4">
+          <Title size={TitleSize.H1} className="text-base sm:text-xl lg:text-2xl p-0 lg:p-4">
             <span className="text-light-blue">{t('ChatMenu.chat-placeholder')}</span>
           </Title>
-          <BtnBase className="text-lg" btnText={t('ChatView.create-room')} btnColor={IBtnColors.Blue} />
+          <BtnBase className="text-sm lg:text-lg p-0 lg:p-4" btnText={t('ChatView.create-room')} btnColor={IBtnColors.Blue} />
         </div>
       )}
     </>

@@ -26,9 +26,9 @@ const ChatViewPagination: FC<ChatViewPaginationProps> = ({ currentChat }) => {
         </>
       ) : (
         <div className={styles['chat-placeholder']}>
-          <Title size={TitleSize.H1} className="text-xl sm:text-2xl lg:text-4xl p-4">
+          <Title size={TitleSize.H1} className=" text-center text-xl sm:text-2xl lg:text-4xl p-4">
             <span className="text-light-blue">{t('ChatView.chat-placeholder')}</span>
-            <div className="text-white">{t('ChatView.or-create-new')}</div>
+            <div className="text-white mt-2">{t('ChatView.or-create-new')}</div>
           </Title>
           <BtnBase className='text-xl' btnText={t('ChatView.create-room')} btnColor={IBtnColors.Blue}/>
         </div>
