@@ -35,13 +35,19 @@ const Auth: FC = () => {
       .catch((error) => {
         setShowConfirmation(false);
         console.error('Registration failed:', error);
+      })
+      .finally(() => {
+        setIsLogin(true);
       });
   };
 
   const loginHandler: SubmitHandler<LoginFormValues> = (data) => {
-    dispatch(login({ ...data }));
-    console.log('🚀 ~ RoutesСonstant.BASE:', RoutesСonstant.BASE);
-    navigate(RoutesСonstant.BASE);
+    dispatch(login({ ...data }))
+    .unwrap()
+    .then(() => {
+      navigate(RoutesСonstant.BASE);
+    })
+
   };
 
   const changeLanguage = (lan: string) => {
@@ -60,7 +66,8 @@ const Auth: FC = () => {
       <div className={styles['auth-container']}>
         <LanSwitcher changeLanguage={(e) => changeLanguage(e)} />
         <FormSwitcher isLogin={isLogin} setIsLogin={setIsLogin} />
-        {!showConfirmation ? <AuthForm /> : <ConfirmationBlock registeredEmail={registeredEmail} />}
+        <AuthForm />
+        {showConfirmation && <ConfirmationBlock registeredEmail={registeredEmail} />}
       </div>
       <SocialLogin />
     </div>

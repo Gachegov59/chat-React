@@ -11,11 +11,12 @@ export const login = createAsyncThunk('auth/login', async ({ email, password }: 
   try {
     const response = await AuthService.login(email, password);
     localStorage.setItem('token', response.data.accessToken);
-    successMessage(JSON.stringify(response.data));
+    successMessage('login - Good');
     return response.data;
   } catch (error: unknown) {
-    errorMessage(error as AxiosError);
-    return rejectWithValue((error as AxiosError).response?.data);
+    const axiosError = error as AxiosError<ErrorResponse>;
+    messageError(axiosError.response?.data?.message || axiosError.message);
+    return rejectWithValue(axiosError.response?.data);
   }
 });
 
@@ -35,7 +36,7 @@ export const registration = createAsyncThunk(
     try {
       const response = await AuthService.registration(email, password, firstName, lastName);
       localStorage.setItem('token', response.data.accessToken);
-      successMessage(JSON.stringify(response.data));
+      successMessage('registration - Good / check your email');
       return response.data;
     } catch (error: unknown) {
       const axiosError = error as AxiosError<ErrorResponse>;
@@ -52,7 +53,9 @@ export const checkAuth = createAsyncThunk('auth/checkAuth', async (_, { rejectWi
     successMessage('checkAuth - Good');
     return response.data;
   } catch (error: unknown) {
-    errorMessage(error as AxiosError);
-    return rejectWithValue((error as AxiosError).response?.data);
+    const axiosError = error as AxiosError<ErrorResponse>;
+    messageError(axiosError.response?.data?.message || axiosError.message);
+    // localStorage.removeItem('token');
+    return rejectWithValue(axiosError.response?.data);
   }
 });

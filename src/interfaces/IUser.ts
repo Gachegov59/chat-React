@@ -7,5 +7,5 @@ export interface IUser {
 	chats?: [];
 	role?: string;
 	photoId?: string;
-	account?: string;
+	// account?: string;
 }
