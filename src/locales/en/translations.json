@@ -1,6 +1,9 @@
 {
   "Account": "Account",
   "ChatView": {
+    "chat-placeholder": "Please select a chat room to start chatting",
+    "or-create-new": "Or create new.😊",
+    "create-room": "Create chat",
     "placeholder": "Enter your message..",
     "send": "Send"
   },

@@ -1,6 +1,9 @@
 {
   "Account": "חשבון",
   "ChatView": {
+    "chat-placeholder": "אנא בחר חדר צ'אט כדי להתחיל לשוחח",
+    "or-create-new": "או צור חדש.😊",
+    "create-room": "צור צ'אט",
     "placeholder": "הכנס את ההודעה שלך..",
     "send": "שלח"
   },

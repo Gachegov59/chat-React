@@ -30,7 +30,8 @@ const ChatView: FC = () => {
             <LoaderSpinner size={100} />
           </div>
         )}
-        <ChatViewPagination currentChat={currentChat} />
+        {/* <ChatViewPagination currentChat={currentChat} /> */}
+        <ChatViewPagination currentChat={null} />
       </div>
       <ChatInputPanel message={message} setMessage={setMessage} clickChatBtn={clickChatBtn} />
     </div>

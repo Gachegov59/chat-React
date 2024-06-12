@@ -5,6 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    extend: {
+      colors: {
+        // lightBlue: '#6ab2f2',
+        'light-blue': 'var(--light-blue)',
+      },
+    },
     screens: {
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
