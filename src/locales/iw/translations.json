@@ -7,6 +7,10 @@
     "placeholder": "הכנס את ההודעה שלך..",
     "send": "שלח"
   },
+  "ChatMenu": {
+    "chat-placeholder": "אין לך חדרים, צור אחד חדש 🎉" ,
+    "create-room": "צור צ'אט"
+  },
   "Auth": {
     "email": "דואר אלקטרוני",
     "password": "סיסמה",

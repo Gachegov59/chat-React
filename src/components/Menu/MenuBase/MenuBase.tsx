@@ -55,7 +55,8 @@ const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
           <BtnBurger clickBtn={clickBtnBurger} parentState={isMenuOpen} />
         </div>
         <div className={`${styles['menu-base__chats']} scroll`}>
-          <MenuChat menuChats={menuChats} />
+          {/* <MenuChat menuChats={menuChats} /> */}
+          <MenuChat menuChats={null} />
         </div>
       </div>
 

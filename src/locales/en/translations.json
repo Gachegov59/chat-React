@@ -7,6 +7,10 @@
     "placeholder": "Enter your message..",
     "send": "Send"
   },
+  "ChatMenu": {
+    "chat-placeholder": "you don't have any rooms, create a new one 🎉",
+    "create-room": "Create chat"
+  },
   "Auth": {
     "email": "Email",
     "password": "Password",
