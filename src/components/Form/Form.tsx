@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { useForm, SubmitHandler, Controller, FieldValues, UseFormProps } from 'react-hook-form';
 import styles from './Form.module.scss';
 import InputBase from '../UI/Input/InputBase/InputBase';
@@ -21,9 +21,11 @@ interface FormProps<T extends FieldValues> extends UseFormProps<T> {
   fields: FormField[];
   onSubmit: SubmitHandler<T>;
   submitButtonText: string;
+  children?: ReactNode;
+  classList?: string;
 }
 
-const Form: FC<FormProps<any>> = ({ fields, onSubmit, submitButtonText, ...useFormProps }) => {
+const Form: FC<FormProps<any>> = ({ children, classList ='', fields, onSubmit, submitButtonText, ...useFormProps }) => {
   const {
     control,
     handleSubmit,
@@ -32,7 +34,7 @@ const Form: FC<FormProps<any>> = ({ fields, onSubmit, submitButtonText, ...useFo
   const { t } = useTranslation();
   return (
     <div>
-      <form className={styles['form']} autoComplete="on" onSubmit={handleSubmit(onSubmit)}>
+      <form className={`${styles['form']} ${classList}`} autoComplete="on" onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field) => (
           <FormGroup key={field.name} label={t(field.label)} error={errors[field.name]?.message as string | undefined}>
             <Controller
@@ -55,7 +57,7 @@ const Form: FC<FormProps<any>> = ({ fields, onSubmit, submitButtonText, ...useFo
         ))}
         {/* todo submit button change - universal */}
         <div className="flex flex-wrap">
-          <BtnBase btnText={submitButtonText} className="bg-teal-500 mt-7 text-base mr-7" btnColor={IBtnColors.Blue} />
+          {children ? children : <BtnBase className='w-full p-2 text-xl' btnText={t(submitButtonText)} btnColor={IBtnColors.Blue} />}
         </div>
       </form>
     </div>

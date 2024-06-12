@@ -40,32 +40,27 @@ const Auth: FC = () => {
 
   const loginHandler: SubmitHandler<LoginFormValues> = (data) => {
     dispatch(login({ ...data }));
-    console.log("🚀 ~ RoutesСonstant.BASE:", RoutesСonstant.BASE)
+    console.log('🚀 ~ RoutesСonstant.BASE:', RoutesСonstant.BASE);
     navigate(RoutesСonstant.BASE);
   };
 
   const changeLanguage = (lan: string) => {
-    console.log("🚀 ~ changeLanguage ~ event.target.value:", lan)
+    console.log('🚀 ~ changeLanguage ~ event.target.value:', lan);
     i18n.changeLanguage(lan);
   };
 
+  const AuthForm = () => {
+    if (isLogin) {
+      return <Form  classList='text-lg' fields={LoginFormFields} onSubmit={loginHandler} submitButtonText="Auth.btn.login" />;
+    }
+    return <Form classList='text-lg' fields={RegisterFormFields} onSubmit={registrationHandler} submitButtonText="Auth.btn.registration" />;
+  };
   return (
     <div className={styles['auth']}>
       <div className={styles['auth-container']}>
-        <LanSwitcher changeLanguage={(e) => changeLanguage(e)}/>
+        <LanSwitcher changeLanguage={(e) => changeLanguage(e)} />
         <FormSwitcher isLogin={isLogin} setIsLogin={setIsLogin} />
-
-        {isLogin ? (
-          <Form fields={LoginFormFields} onSubmit={loginHandler} submitButtonText="Login" />
-        ) : (
-          <>
-            {!showConfirmation ? (
-              <Form fields={RegisterFormFields} onSubmit={registrationHandler} submitButtonText="Register" />
-            ) : (
-              <ConfirmationBlock registeredEmail={registeredEmail} />
-            )}
-          </>
-        )}
+        {!showConfirmation ? <AuthForm /> : <ConfirmationBlock registeredEmail={registeredEmail} />}
       </div>
       <SocialLogin />
     </div>

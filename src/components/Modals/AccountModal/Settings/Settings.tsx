@@ -17,7 +17,7 @@ const Settings: React.FC<SettingsProps> = () => {
   };
   return (
     <div>
-      <Form fields={SettingsFormFields} onSubmit={settingsHandler} submitButtonText="Login" />
+      <Form fields={SettingsFormFields} onSubmit={settingsHandler} submitButtonText="settings.save" />
     </div>
   );
 };

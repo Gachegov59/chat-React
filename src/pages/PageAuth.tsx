@@ -13,7 +13,7 @@ const PageAuth: FC = () => {
     <DefaultLayout classNameContainer={containerClasses} classNameMain={mainClasses}>
       <Container className={container}>
         <Title size={TitleSize.H1} className="text-teal-500 text-3xl sm:text-5xl lg:text-7xl text-center pb-4">
-          <span className="text-nowrap text-teal-500">The Best Chat Company </span> welcome <strong>you</strong>!
+          <span className="text-nowrap text-teal-500">The Best Chat Company </span> welcomes <strong>you</strong>!
         </Title>
         <Auth />
       </Container>

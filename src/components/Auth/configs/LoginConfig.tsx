@@ -8,7 +8,7 @@ export const LoginFormFields = [
     name: 'email',
     label: 'Auth.email',
     type: 'text',
-    placeholder: 'Auth.placeholder.username',
+    placeholder: 'Auth.placeholder.email',
     autoComplete: 'username',
     validation: { required: 'Auth.validation.requiredEmail' },
   },

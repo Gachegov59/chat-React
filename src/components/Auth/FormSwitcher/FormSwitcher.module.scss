@@ -1,6 +1,6 @@
 .form-switcher {
     display: flex;
-    margin-bottom: 20px;
+    margin: 10px 0 30px;
 
     .switch-button {
         padding: 10px 20px;
@@ -8,7 +8,7 @@
         background: none;
         border: none;
         outline: none;
-        font-size: 16px;
+        font-size: 20px;
         // transition: var(--transition-default);
     }
 

@@ -2,17 +2,18 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './LanSwitcher.module.scss';
+import languages from './types';
 
 interface changeLanguageProps {
   classNames?: string;
-  changeLanguage: (lan: string) => void;
+  changeLanguage: (lan: languages) => void;
 }
-
+// todo !add initial lang from backend
 const LanSwitcher: FC<changeLanguageProps> = ({changeLanguage, classNames = ''}) => {
   const { i18n } = useTranslation();
 
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    changeLanguage(event.target.value);
+    changeLanguage(event.target.value as languages);
   };
 
   return (

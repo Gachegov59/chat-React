@@ -8,6 +8,7 @@ import BtnBase from '@/components/UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '@/components/UI/Button/BtnBase/IBtn';
 import { useAppDispatch } from '@/hooks/redux';
 import { logout } from '@/store/auth/authActions';
+import languages from '@/components/LanSwitcher/types';
 interface AccountModalProps {
   isShowAccountModal: boolean;
   closeAccountModal: () => void;
@@ -27,7 +28,7 @@ const AccountModal: FC<AccountModalProps> = ({
   const { i18n } = useTranslation();
   const dispatch = useAppDispatch();
   
-  const changeLanguage = (lan: string) => {
+  const changeLanguage = (lan: languages) => {
     console.log('🚀 ~ changeLanguage ~ event.target.value:', lan);
     i18n.changeLanguage(lan);
   };
