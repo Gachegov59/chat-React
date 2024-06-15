@@ -51,6 +51,9 @@
     "name": "Name",
     "create": "Create",
     "cancel": "Cancel",
-    "placeholder": "Enter chat name"
+    "placeholder": "Enter chat name",
+    "validation": {
+      "requiredName": "Chat name is required"
+    }
   }
 }

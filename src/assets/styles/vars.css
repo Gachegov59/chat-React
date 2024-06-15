@@ -27,5 +27,5 @@
   --transition-default: all 0.3s ease;
   --base-font-size: 10px;
 
-  --validate-error: #bf1650;
+  --validate-error: #cc0000;
 }
