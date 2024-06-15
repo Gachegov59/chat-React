@@ -18,20 +18,26 @@ const AccountModal: FC<AccountModalProps> = ({
   isShowAccountModal: isShowAuthModal,
   closeAccountModal: closeAuthModal,
 }) => {
-
   const { i18n } = useTranslation();
   const dispatch = useAppDispatch();
-  
+
   const changeLanguage = (lan: languages) => {
     console.log('🚀 ~ changeLanguage ~ event.target.value:', lan);
     i18n.changeLanguage(lan);
   };
-  
+
+  const childrenBtn = (
+    <BtnBase
+      className="mt-5 text-lg py- px-6"
+      btnColor={IBtnColors.BlueDark}
+      clickBtn={() => dispatch(logout())}
+      btnText="Logout"
+    />
+  );
   return (
-    <ModalBase isShowModal={isShowAuthModal} closeModal={closeAuthModal}>
-      <LanSwitcher classNames='ml-auto inline-block mb-4' changeLanguage={(e) => changeLanguage(e)} />
-      <Settings/>
-      <BtnBase className='mt-5 text-lg py- px-6' btnColor={IBtnColors.BlueDark} clickBtn={() => dispatch(logout())} btnText="Logout" />
+    <ModalBase isShowModal={isShowAuthModal} childrenBtnButtom={childrenBtn} closeModal={closeAuthModal}>
+      <LanSwitcher classNames="ml-auto inline-block mb-4" changeLanguage={(e) => changeLanguage(e)} />
+      <Settings />
     </ModalBase>
   );
 };

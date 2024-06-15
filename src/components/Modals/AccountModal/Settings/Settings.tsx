@@ -5,19 +5,15 @@ import { SettingsFormFields } from './SetingsConfig';
 
 interface SettingsProps {}
 export type SettingsFormValues = {
-  // email: string;
-  // password: string;
 };
 
 const Settings: FC<SettingsProps> = () => {
-  const settingsHandler: SubmitHandler<SettingsFormValues> = (data) => {
-    // dispatch(login({ ...data }));
-    // console.log('🚀 ~ RoutesСonstant.BASE:', RoutesСonstant.BASE);
-    // navigate(RoutesСonstant.BASE);
+  const settingsHandler: SubmitHandler<SettingsFormValues> = () => {
+
   };
   return (
     <div>
-      <Form fields={SettingsFormFields} onSubmit={settingsHandler} submitButtonText="settings.save" />
+      <Form fields={SettingsFormFields} classListBtn='w-min px-4' onSubmit={settingsHandler} submitButtonText="settings.save" />
     </div>
   );
 };

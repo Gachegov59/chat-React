@@ -32,6 +32,12 @@
 		width: 95%;
 	}
 	&__container {
+		display: flex;
+		flex-direction: column;
+
+		min-height: 200px;
+	}
+	&__content {
 		display: block;
 	}
 	&__close {
@@ -46,5 +52,8 @@
 		&:hover svg path {
 			fill: var(--light-blue);
 		}
+	}
+	&__footer {
+		margin-top: 20px;
 	}
 }

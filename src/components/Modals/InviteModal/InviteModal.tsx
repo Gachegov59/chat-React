@@ -33,8 +33,21 @@ const InviteModal: FC<InviteModalProps> = ({ chat, isShowInviteModal, closeInvit
   useEffect(() => {
     getUsers();
   });
+
+  const handleinvite = () => {
+    console.log('handleinvite');
+  };
+  const inviteButton = (
+    <BtnBase
+      className="mt-5 text-lg py- px-6 self-end"
+      btnColor={IBtnColors.BlueDark}
+      clickBtn={handleinvite}
+      btnText={t('ChatView.invite')}
+    />
+  );
+
   return (
-    <ModalBase isShowModal={isShowInviteModal} closeModal={closeInviteModal}>
+    <ModalBase isShowModal={isShowInviteModal} childrenBtnButtom={inviteButton} closeModal={closeInviteModal}>
       <div className={styles['invite-modal']}>
         <div className={styles['invite-modal__container']}>
           {isAuth ? (
@@ -48,12 +61,6 @@ const InviteModal: FC<InviteModalProps> = ({ chat, isShowInviteModal, closeInvit
           ) : (
             isLoading && <LoaderSpinner size={100}></LoaderSpinner>
           )}
-          <BtnBase
-            className="mt-5 text-lg py- px-6 self-end"
-            btnColor={IBtnColors.BlueDark}
-            clickBtn={() => invite}
-            btnText={t('ChatView.invite')}
-          />
         </div>
       </div>
     </ModalBase>

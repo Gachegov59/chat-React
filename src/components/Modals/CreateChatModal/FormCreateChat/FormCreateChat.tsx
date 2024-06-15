@@ -13,7 +13,7 @@ const FormCreateChat: FC<FormCreateChatProps> = () => {
   const FormCreateChatHandler: SubmitHandler<FormCreateChatFormValues> = (data) => {};
   return (
     <div>
-      <Form fields={FormCreateChatFields} onSubmit={FormCreateChatHandler} submitButtonText="createChat.create" />
+      <Form fields={FormCreateChatFields} onSubmit={FormCreateChatHandler}/>
     </div>
   );
 };

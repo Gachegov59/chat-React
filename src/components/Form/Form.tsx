@@ -20,12 +20,21 @@ interface FormField {
 interface FormProps<T extends FieldValues> extends UseFormProps<T> {
   fields: FormField[];
   onSubmit: SubmitHandler<T>;
-  submitButtonText: string;
+  submitButtonText?: string;
   children?: ReactNode;
   classList?: string;
+  classListBtn?: string;
 }
 
-const Form: FC<FormProps<any>> = ({ children, classList ='', fields, onSubmit, submitButtonText, ...useFormProps }) => {
+const Form: FC<FormProps<any>> = ({
+  children,
+  classList = '',
+  classListBtn = '',
+  fields,
+  onSubmit,
+  submitButtonText = null,
+  ...useFormProps
+}) => {
   const {
     control,
     handleSubmit,
@@ -55,9 +64,18 @@ const Form: FC<FormProps<any>> = ({ children, classList ='', fields, onSubmit, s
             />
           </FormGroup>
         ))}
+
         {/* todo submit button change - universal */}
         <div className="flex flex-wrap">
-          {children ? children : <BtnBase className='w-full p-2 text-xl' btnText={t(submitButtonText)} btnColor={IBtnColors.Blue} />}
+          {children
+            ? children
+            : submitButtonText && (
+                <BtnBase
+                  className={`w-full p-2 text-md lg:text-xl ${classListBtn}`}
+                  btnText={t(submitButtonText)}
+                  btnColor={IBtnColors.Blue}
+                />
+              )}
         </div>
       </form>
     </div>

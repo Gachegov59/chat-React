@@ -6,9 +6,10 @@ interface ModalBaseProps {
   isShowModal: boolean;
   closeModal: () => void;
   children: ReactNode;
+  childrenBtnButtom?: ReactNode;
 }
 
-const ModalBase: FC<ModalBaseProps> = ({ isShowModal, closeModal, children }) => {
+const ModalBase: FC<ModalBaseProps> = ({ isShowModal, closeModal, children, childrenBtnButtom }) => {
   if (!isShowModal) return null;
 
   return (
@@ -18,7 +19,10 @@ const ModalBase: FC<ModalBaseProps> = ({ isShowModal, closeModal, children }) =>
         <div className={styles['modal__close']} onClick={closeModal}>
           <CloseButton />
         </div>
-        <div className={styles['modal__container']}>{children}</div>
+        <div className={styles['modal__container']}>
+          <div className={styles['modal__content']}>{children}</div>
+        </div>
+        {childrenBtnButtom ? <div className={styles['modal__footer']}>{childrenBtnButtom}</div> : null}
       </div>
     </div>
   );
