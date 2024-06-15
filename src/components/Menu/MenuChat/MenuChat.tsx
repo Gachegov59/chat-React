@@ -39,7 +39,9 @@ const MenuChat: FC<MenuChatProps> = ({ menuChats, menuChats2 }) => {
         </div>
       )}
       
-      {menuChats2 && menuChats2.map((chat) => chat.name)}
+      {menuChats2 && menuChats2.map((chat) => (
+        <div key={chat._id}>{chat.name}</div>
+      ))}
 
     </>
   );

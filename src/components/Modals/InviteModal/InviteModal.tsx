@@ -32,7 +32,7 @@ const InviteModal: FC<InviteModalProps> = ({ chat, isShowInviteModal, closeInvit
 
   useEffect(() => {
     getUsers();
-  });
+  },[]);
 
   const handleinvite = () => {
     console.log('handleinvite');

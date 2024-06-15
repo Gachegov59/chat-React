@@ -1,6 +1,6 @@
 export const FormCreateChatFields = [
   {
-    name: 'Name',
+    name: 'name',
     label: 'createChat.name',
     type: 'input',
     placeholder: 'createChat.placeholder',
