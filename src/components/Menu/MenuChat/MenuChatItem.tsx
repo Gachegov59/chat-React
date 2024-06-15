@@ -6,7 +6,7 @@ import { IRoom } from '@/interfaces/IMenu';
 import { useAppDispatch } from '@/hooks/redux';
 import { setActiveRoom } from '@/store/room/roomSlice';
 interface MenuChatProps {
-  chat: IRoom;
+  menuChat: IRoom;
 }
 
 const getAvatarSize = (width: number): number => {
@@ -14,7 +14,13 @@ const getAvatarSize = (width: number): number => {
   return 50;
 };
 
-const MenuChatItem: FC<MenuChatProps> = ({ chat }) => {
+const MenuChatItem: FC<MenuChatProps> = ({ menuChat }) => {
+  console.log('MenuChatItem render:', menuChat);
+
+  if (!menuChat) {
+    return null; 
+  }
+
   const [avatarSize, setAvatarSize] = useState<number>(getAvatarSize(window.innerWidth));
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -28,29 +34,29 @@ const MenuChatItem: FC<MenuChatProps> = ({ chat }) => {
   });
 
   const handleClick = () => {
-    dispatch(setActiveRoom(chat));
+    dispatch(setActiveRoom(menuChat));
   };
 
   return (
     <>
-      <div key={chat._id} className={styles['menuChat-item']} onClick={handleClick}>
+      <div key={menuChat._id} className={styles['menuChat-item']} onClick={handleClick}>
         <div className={styles['menuChat-item__avatar']}>
-          {chat.image && <AvatarChatBase image={chat.image} size={avatarSize} imageTitle={chat.name} />}
-          {chat.users.length < 2 ? (
-            <AvatarChatBase image="avatar-default_1.png" size={avatarSize} imageTitle={chat.name} />
+          {menuChat.image && <AvatarChatBase image={menuChat.image} size={avatarSize} imageTitle={menuChat.name} />}
+          {menuChat.users?.length < 2 ? (
+            <AvatarChatBase image="avatar-default_1.png" size={avatarSize} imageTitle={menuChat.name} />
           ) : (
-            <AvatarChatBase image="avatar-default_2.png" size={avatarSize} imageTitle={chat.name} />
+            <AvatarChatBase image="avatar-default_2.png" size={avatarSize} imageTitle={menuChat.name} />
           )}
         </div>
         <div className={styles['menuChat-item__container']}>
           <div className={styles['menuChat-item__top']}>
-            <div className={styles['menuChat-item__name']}>{chat.name}</div>
-            {chat.lastMessage && (
-              <div className={styles['menuChat-item__date']}>{dayjs(chat.lastMessage.date).format('HH.MM')}</div>
+            <div className={styles['menuChat-item__name']}>{menuChat.name}</div>
+            {menuChat.lastMessage && (
+              <div className={styles['menuChat-item__date']}>{dayjs(menuChat.lastMessage.date).format('HH.MM')}</div>
             )}
           </div>
           <div className={styles['menuChat-item__content']}>
-            {chat.lastMessage && <div className={styles['menuChat-item__text']}>{chat.lastMessage.text}</div>}
+            {menuChat.lastMessage && <div className={styles['menuChat-item__text']}>{menuChat.lastMessage.text}</div>}
           </div>
           {/* {chat.counter && <div className={styles['menuChat-item__counter']}>{chat.counter}</div>} */}
         </div>

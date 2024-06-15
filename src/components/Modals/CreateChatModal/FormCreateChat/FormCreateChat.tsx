@@ -16,17 +16,16 @@ const FormCreateChat: FC<FormCreateChatProps> = () => {
   const dispatch = useAppDispatch();
   const userId: string = useAppSelector((state) => state.auth.user?.id);
 
-  const FormCreateChatHandler: SubmitHandler<FormCreateChatFormValues> = (data) => {
-    console.log(data.name);
-    console.log(userId);
-
+  const FormCreateChatHandler: SubmitHandler<FormCreateChatFormValues> = async (data) => {
     if (!userId) return;
-    dispatch(createRoom({ name: data.name, userId }))
-      .unwrap()
-      .then(() => {
-        dispatch(getRoomsForUser(userId));
-      });
-    dispatch(closeCreateChatModal());
+
+    try {
+      await dispatch(createRoom({ name: data.name, userId })).unwrap();
+      await dispatch(getRoomsForUser(userId)).unwrap();
+      dispatch(closeCreateChatModal());
+    } catch (error) {
+      console.error('Failed to create room:', error);
+    }
   };
 
   return (

@@ -18,7 +18,7 @@ export default class RoomService {
   }
 
   static async deleteRoom(roomId: string, userId: string): Promise<AxiosResponse<{ roomId: string }>> {
-    return axiosInstance.delete(`${API_URL}/delete/${roomId}`, { data: { userId } });
+    return axiosInstance.delete(`${API_URL}/delete`, { data: { roomId, userId } });
   }
 
   static async getRoomsForUser(userId: string): Promise<AxiosResponse<Room[]>> {

@@ -9,7 +9,9 @@ import { useTranslation } from 'react-i18next';
 import InviteModal from '../Modals/InviteModal/InviteModal';
 import BtnBase from '../UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '../UI/Button/BtnBase/IBtn';
-import { useAppSelector } from '@/hooks/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import ConfirmationModal from '../Modals/ConfirmationModal/ConfirmationModal';
+import { openConfirmationModal } from '@/store/modal/modalSlice';
 
 const ChatView: FC = () => {
   const [loaded] = useState<boolean>(true);
@@ -19,7 +21,7 @@ const ChatView: FC = () => {
   const { i18n } = useTranslation();
   const { activeRoom } = useAppSelector((state) => state.room);
   const { user } = useAppSelector((state) => state.auth);
-
+  const dispatch = useAppDispatch();
   const clickChatBtn = () => {
     setMessage('');
   };
@@ -31,6 +33,9 @@ const ChatView: FC = () => {
 
   const closeInviteModal = () => setIsShowInvitetModal(false);
 
+  const handleOpenConfirmationModal = () => {
+    dispatch(openConfirmationModal());
+  };
   return (
     <div className={styles['chat-view']}>
       <div className={styles['chat-view__top']}>
@@ -50,7 +55,7 @@ const ChatView: FC = () => {
                     btnText={i18n.t('ChatView.delete')}
                     className=" mx-1 bg-rose-950 outline outline-1 outline-teal-50"
                     btnColor={IBtnColors.Blue}
-                    clickBtn={() => setIsShowInvitetModal(true)}
+                    clickBtn={handleOpenConfirmationModal}
                   />
                 </>
               )}

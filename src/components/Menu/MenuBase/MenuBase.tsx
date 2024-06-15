@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import CreateChatModal from '@/components/Modals/CreateChatModal/CreateChatModal';
 import { getRoomsForUser } from '@/store/room/roomActions';
 import LoaderSpinner from '@/components/UI/Loader/LoaderSpinner/LoaderSpinner';
+import ConfirmationModal from '@/components/Modals/ConfirmationModal/ConfirmationModal';
+import { openCreateChatModal } from '@/store/modal/modalSlice';
 
 interface MenuBaseProps {
   // menuChats: IRoom[];
@@ -20,7 +22,7 @@ const MenuBase: FC<MenuBaseProps> = () => {
   const [isShowAccountModal, setIsShowAccountModal] = useState<boolean>(false);
   const { rooms, isLoading } = useAppSelector((state) => state.room);
   const { user } = useAppSelector((state) => state.auth);
-  const { isCreateChatOpen } = useAppSelector((state) => state.modal);
+  const { isCreateChatOpen, isConfirmationModalOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -45,22 +47,29 @@ const MenuBase: FC<MenuBaseProps> = () => {
 
   const closeAuthModal = () => setIsShowAccountModal(false);
   const openAuthModal = () => setIsShowAccountModal(true);
-
+  const handleOpenCreateChatModal = () => {
+    dispatch(openCreateChatModal());
+  };
   return (
     <div className={styles['menu-base']}>
       <div className={styles['menu-base__container']}>
-        {/* <div className={styles['menu-base__top']}></div> */}
         <div className={styles['menu-base__btn']}>
           <BtnBurger clickBtn={clickBtnBurger} parentState={isMenuOpen} />
         </div>
-        <div className={`${styles['menu-base__chats']} scroll`}>
+      
+        <div className={`${styles['menu-base__chats']} scroll ${isLoading ? styles._loading : ''}`}>
           {isLoading ? <LoaderSpinner size={150} /> : <MenuChat menuChats={rooms} />}
-          {/* <MenuChat menuChats={menuChats} /> */}
-          {/* <MenuChat menuChats={rooms} /> */}
+        </div>
+        <div className={styles['menu-base__top']}>
+          <BtnBase
+            btnColor={IBtnColors.Blue}
+            className="text-sm px-2 ml-auto"
+            btnText={t('ChatMenu.createChat')}
+            clickBtn={handleOpenCreateChatModal}
+          />
         </div>
       </div>
 
-      {/* // todo: menu-base__sidebar - separete component ? ...*/}
       <div className={`${styles['menu-base__sidebar']} ${isMenuOpen ? styles._open : ''}`}>
         <div className={styles['menu-base__btn']}>
           <BtnBurger clickBtn={clickBtnBurger} parentState={isMenuOpen} />
@@ -70,11 +79,13 @@ const MenuBase: FC<MenuBaseProps> = () => {
             {t('Account')}
           </BtnBase>
         </div>
+        
       </div>
 
       <div className={styles['menu-base__modal']}>
         <AccountModal isShowAccountModal={isShowAccountModal} closeAccountModal={closeAuthModal} />
         <CreateChatModal isCreateChatModalOpen={isCreateChatOpen} />
+        <ConfirmationModal isShowModal={isConfirmationModalOpen} />
       </div>
     </div>
   );
