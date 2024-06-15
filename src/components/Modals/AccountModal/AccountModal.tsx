@@ -14,12 +14,6 @@ interface AccountModalProps {
   closeAccountModal: () => void;
 }
 
-// interface User {
-//   name: string;
-//   surname: string;
-//   nickname: string;
-// }
-export const oldFunc = () => {};
 const AccountModal: FC<AccountModalProps> = ({
   isShowAccountModal: isShowAuthModal,
   closeAccountModal: closeAuthModal,

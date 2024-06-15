@@ -5,7 +5,8 @@
     "or-create-new": "Or create new.😊",
     "create-room": "Create chat",
     "placeholder": "Enter your message..",
-    "send": "Send"
+    "send": "Send",
+    "invite": "Invite"
   },
   "ChatMenu": {
     "chat-placeholder": "you don't have any rooms, create a new one 🎉",

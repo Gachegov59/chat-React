@@ -6,9 +6,13 @@ import { ICurrentChat } from '../../interfaces/IChat';
 import ChatViewPagination from './ChatViewPagination/ChatViewPagination';
 import ChatInputPanel from './ChatInputPanel/ChatInputPanel';
 import { useTranslation } from 'react-i18next';
+import InviteModal from '../Modals/InviteModal/InviteModal';
+import BtnBase from '../UI/Button/BtnBase/BtnBase';
+import { IBtnColors } from '../UI/Button/BtnBase/IBtn';
 
 const ChatView: FC = () => {
   const [loaded] = useState<boolean>(true);
+  const [isShowInviteModal, setIsShowInvitetModal] = useState<boolean>(false);
   const [currentChat] = useState<ICurrentChat>(currentChatAPI);
   const [message, setMessage] = useState<string>('');
   const { i18n } = useTranslation();
@@ -16,14 +20,15 @@ const ChatView: FC = () => {
     setMessage('');
   };
 
-  //todo: chek for chenge on hebrew! / it has bag with layout scss..
-  // useEffect(() => {
-  //   document.documentElement.dir = 'ltr';
-  // }, []);
+  const closeInviteModal = () => setIsShowInvitetModal(false);
 
   return (
     <div className={styles['chat-view']}>
-      <div className={styles['chat-view__top']}></div>
+      <div className={styles['chat-view__top']}>
+        <div className={styles['chat-view__invite']}>
+          <BtnBase btnText={i18n.t('ChatView.invite')} btnColor={IBtnColors.Blue} clickBtn={() => setIsShowInvitetModal(true)}/>
+        </div>
+      </div>
       <div className={`${styles['chat-view__content']} scroll`}>
         {!loaded && (
           <div className={styles['chat-view__loader']}>
@@ -34,6 +39,8 @@ const ChatView: FC = () => {
         <ChatViewPagination currentChat={null} />
       </div>
       <ChatInputPanel message={message} setMessage={setMessage} clickChatBtn={clickChatBtn} />
+      <InviteModal chat={null} isShowInviteModal={isShowInviteModal} closeInviteModal={() => closeInviteModal()} />
+
     </div>
   );
 };

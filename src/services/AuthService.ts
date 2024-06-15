@@ -1,6 +1,6 @@
 import axiosInstance from '../http';
 import { AxiosResponse } from 'axios';
-import { AuthResponse } from '../models/response/AuthResponse';
+import { AuthResponse } from '../models/Auth';
 import Endpoints from '../http/constant';
 
 const { USERS_BASE_ROUTE, LOGIN, REGISTRATION, LOGOUT, REFRESH } = Endpoints.USER;

@@ -8,8 +8,15 @@
 	padding-left: 2px;
 
 	&__top {
+		padding: 10px;
+		display: flex;
+		align-items: center;
 		height: 67px;
 		background: var(--dark);
+	}
+
+	&__invite {
+		margin-left: auto;
 	}
 
 	&__content {
@@ -18,6 +25,7 @@
 		height: calc(100vh - 67px - 54px);
 		padding: 10px 0;
 	}
+
 	&__contant {
 		display: block;
 	}

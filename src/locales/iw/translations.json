@@ -5,7 +5,8 @@
     "or-create-new": "או צור חדש.😊",
     "create-room": "צור צ'אט",
     "placeholder": "הכנס את ההודעה שלך..",
-    "send": "שלח"
+    "send": "שלח",
+    "invite": "הזמן"
   },
   "ChatMenu": {
     "chat-placeholder": "אין לך חדרים, צור אחד חדש 🎉" ,

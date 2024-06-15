@@ -1,16 +1,16 @@
-import { useState, useCallback, FC } from 'react';
+import { useState, useCallback, FC, useEffect } from 'react';
 import styles from './MenuBase.module.scss';
 import BtnBurger from '../../UI/Button/BtnBurger/BtnBurger';
 import BtnBase from '../../UI/Button/BtnBase/BtnBase';
 import { IMenuChat } from '../../../interfaces/IMenu';
 import MenuChat from '../MenuChat/MenuChat';
 import { IBtnColors } from '../../UI/Button/BtnBase/IBtn';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import AccountModal from '@/components/Modals/AccountModal/AccountModal';
-import { UserAuth } from '@/models/UserAuth';
-import UserService from '@/services/UserService';
-import LoaderSpinner from '@/components/UI/Loader/LoaderSpinner/LoaderSpinner';
 import { t } from 'i18next';
+import { useAppSelector } from '@/hooks/redux';
+import RoomService from '@/services/RoomService';
+import { Room } from '@/models/Room';
+import CreateChatModal from '@/components/Modals/CreateChatModal/CreateChatModal';
 
 interface MenuBaseProps {
   menuChats: IMenuChat[];
@@ -19,16 +19,27 @@ interface MenuBaseProps {
 const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isShowAccountModal, setIsShowAccountModal] = useState<boolean>(false);
-  const [users, setUsers] = useState<UserAuth[]>([]);
-  const { isAuth, isLoading } = useAppSelector((state) => state.auth);
-
-  //todo: test - remove!
-  async function getUsers() {
+  const [rooms, setRooms] = useState<Room[]>([]);
+  const { user } = useAppSelector((state) => state.auth);
+  const { isCreateChatOpen } = useAppSelector((state) => state.modal);
+  async function getRooms() {
     try {
-      const response = await UserService.fetchUsers();
-      setUsers(response.data);
-    } catch (error) {}
+      const response = await RoomService.getRoomsForUser(user.id);
+      setRooms(response.data);
+    } catch (error) {
+      console.error('Failed to fetch rooms:', error);
+    }
   }
+
+  useEffect(() => {
+    if (user.id) {
+      getRooms();
+    }
+  }, [user._id]);
+
+  // const handleCloseCreateChatModal = () => {
+  //   console.log('handleCloseCreateChatModal')
+  // }
 
   const clickBtnBurger = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -55,8 +66,9 @@ const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
           <BtnBurger clickBtn={clickBtnBurger} parentState={isMenuOpen} />
         </div>
         <div className={`${styles['menu-base__chats']} scroll`}>
+          <MenuChat menuChats={null} menuChats2={rooms} />
           {/* <MenuChat menuChats={menuChats} /> */}
-          <MenuChat menuChats={null} />
+          {/* <MenuChat menuChats={rooms} /> */}
         </div>
       </div>
 
@@ -69,31 +81,12 @@ const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
           <BtnBase btnColor={IBtnColors.BlueDark} clickBtn={openAuthModal} btnText="Войти">
             {t('Account')}
           </BtnBase>
-
-         
-          
         </div>
-
-        {/* todo: temporarly for test */}
-        {isAuth ? (
-          <>
-            <BtnBase
-              btnText="getUsers"
-              className=" border-2 mt-7 "
-              btnColor={IBtnColors.BlueDark}
-              clickBtn={getUsers}
-            />
-            {users.map((user) => (
-              <div key={user.email}>{user.email}</div>
-            ))}
-          </>
-        ) : (
-          isLoading && <LoaderSpinner size={100}></LoaderSpinner>
-        )}
       </div>
 
       <div className={styles['menu-base__modal']}>
         <AccountModal isShowAccountModal={isShowAccountModal} closeAccountModal={closeAuthModal} />
+        <CreateChatModal isCreateChatModalOpen={isCreateChatOpen} />
       </div>
     </div>
   );

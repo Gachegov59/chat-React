@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AuthResponse } from '../models/response/AuthResponse';
+import { AuthResponse } from '../models/Auth';
 export const API_URL = import.meta.env.VITE_API_URL;
 
 const axiosInstance = axios.create({

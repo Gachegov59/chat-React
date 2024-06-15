@@ -1,7 +1,7 @@
 export interface IUser {
 	id: string;
-	name: string;
-	surname: string;
+	firstName: string;
+	lastName: string;
 	status: boolean;
 	middleName?: string;
 	chats?: [];

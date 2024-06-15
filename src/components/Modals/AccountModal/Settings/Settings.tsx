@@ -1,5 +1,5 @@
 import Form from '@/components/Form/Form';
-import React from 'react';
+import { FC } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { SettingsFormFields } from './SetingsConfig';
 
@@ -9,7 +9,7 @@ export type SettingsFormValues = {
   // password: string;
 };
 
-const Settings: React.FC<SettingsProps> = () => {
+const Settings: FC<SettingsProps> = () => {
   const settingsHandler: SubmitHandler<SettingsFormValues> = (data) => {
     // dispatch(login({ ...data }));
     // console.log('🚀 ~ RoutesСonstant.BASE:', RoutesСonstant.BASE);

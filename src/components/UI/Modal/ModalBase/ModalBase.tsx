@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import styles from './ModalBase.module.scss';
 import CloseButton from '@/assets/svg/close-button';
 
 interface ModalBaseProps {
   isShowModal: boolean;
   closeModal: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const ModalBase: FC<ModalBaseProps> = ({ isShowModal, closeModal, children }) => {

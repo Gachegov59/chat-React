@@ -7,15 +7,24 @@ import Title, { TitleSize } from '@/components/UI/Title/Title';
 import BtnBase from '@/components/UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '@/components/UI/Button/BtnBase/IBtn';
 import { t } from 'i18next';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { closeCreateChatModal, openCreateChatModal } from '@/store/modal/modalSlice';
 
 interface ChatViewPaginationProps {
   currentChat: ICurrentChat | null;
-  // total: number;
-  // page: number;
-  // changePage: (page: number) => void;
 }
 
 const ChatViewPagination: FC<ChatViewPaginationProps> = ({ currentChat }) => {
+  const { isCreateChatOpen } = useAppSelector((state) => state.modal);
+  const dispatch = useAppDispatch();
+  const handleOpenCreateChatModal = () => {
+    dispatch(openCreateChatModal());
+  };
+
+  // const handleCloseCreateChatModal = () => {
+  //   dispatch(closeCreateChatModal());
+  // };
+  
   return (
     <div className={styles['chat-view-pagination']}>
       {currentChat ? (
@@ -30,7 +39,7 @@ const ChatViewPagination: FC<ChatViewPaginationProps> = ({ currentChat }) => {
             <span className="text-light-blue">{t('ChatView.chat-placeholder')}</span>
             <div className="text-white mt-2">{t('ChatView.or-create-new')}</div>
           </Title>
-          <BtnBase className='text-xl' btnText={t('ChatView.create-room')} btnColor={IBtnColors.Blue}/>
+          <BtnBase clickBtn={handleOpenCreateChatModal} className="text-xl" btnText={t('ChatView.create-room')} btnColor={IBtnColors.Blue} />
         </div>
       )}
     </div>
@@ -38,3 +47,7 @@ const ChatViewPagination: FC<ChatViewPaginationProps> = ({ currentChat }) => {
 };
 
 export default ChatViewPagination;
+function dispatch(arg0: any) {
+  throw new Error('Function not implemented.');
+}
+
