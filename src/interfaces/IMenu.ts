@@ -1,11 +1,19 @@
-export interface IMenuChat {
-  id: string;
-  image: string;
+interface LastMessage {
+  text: string;
+  date: string;
+}
+interface RoomSettings {
+  allowGuests: boolean;
+}
+export interface IRoom {
+  _id: string;
   name: string;
-  type: 'user' | 'group';
-  counter: number;
-  lastMessage: {
-    text: string;
-    date: string;
-  };
+  users: string[];
+  creator: string;
+  settings?: RoomSettings;
+  createdAt: Date;
+  image: string;
+  type?: 'user' | 'group';
+  counter?: number;
+  lastMessage?: LastMessage;
 }

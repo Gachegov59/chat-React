@@ -2,40 +2,43 @@ import { useState, useCallback, FC, useEffect } from 'react';
 import styles from './MenuBase.module.scss';
 import BtnBurger from '../../UI/Button/BtnBurger/BtnBurger';
 import BtnBase from '../../UI/Button/BtnBase/BtnBase';
-import { IMenuChat } from '../../../interfaces/IMenu';
+import { IRoom } from '../../../interfaces/IMenu';
 import MenuChat from '../MenuChat/MenuChat';
 import { IBtnColors } from '../../UI/Button/BtnBase/IBtn';
 import AccountModal from '@/components/Modals/AccountModal/AccountModal';
 import { t } from 'i18next';
-import { useAppSelector } from '@/hooks/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import RoomService from '@/services/RoomService';
 import { Room } from '@/models/Room';
 import CreateChatModal from '@/components/Modals/CreateChatModal/CreateChatModal';
+import { getRoomsForUser } from '@/store/room/roomActions';
+import LoaderSpinner from '@/components/UI/Loader/LoaderSpinner/LoaderSpinner';
 
 interface MenuBaseProps {
-  menuChats: IMenuChat[];
+  menuChats: IRoom[];
 }
 
 const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isShowAccountModal, setIsShowAccountModal] = useState<boolean>(false);
-  const [rooms, setRooms] = useState<Room[]>([]);
+  const { rooms, isLoading, error } = useAppSelector((state) => state.room);
   const { user } = useAppSelector((state) => state.auth);
   const { isCreateChatOpen } = useAppSelector((state) => state.modal);
-  async function getRooms() {
-    try {
-      const response = await RoomService.getRoomsForUser(user.id);
-      setRooms(response.data);
-    } catch (error) {
-      console.error('Failed to fetch rooms:', error);
-    }
-  }
+  const dispatch = useAppDispatch();
+  // async function getRooms() {
+  // try {
+  //   const response = await RoomService.getRoomsForUser(user.id);
+  //   setRooms(response.data);
+  // } catch (error) {
+  //   console.error('Failed to fetch rooms:', error);
+  // }
+  // }
 
   useEffect(() => {
     if (user.id) {
-      getRooms();
+      dispatch(getRoomsForUser(user.id));
     }
-  }, [user._id]);
+  }, [dispatch, user.id]);
 
   // const handleCloseCreateChatModal = () => {
   //   console.log('handleCloseCreateChatModal')
@@ -66,7 +69,7 @@ const MenuBase: FC<MenuBaseProps> = ({ menuChats }) => {
           <BtnBurger clickBtn={clickBtnBurger} parentState={isMenuOpen} />
         </div>
         <div className={`${styles['menu-base__chats']} scroll`}>
-          <MenuChat menuChats={null} menuChats2={rooms} />
+          {isLoading ? <LoaderSpinner size={150} /> : <MenuChat menuChats={rooms} />}
           {/* <MenuChat menuChats={menuChats} /> */}
           {/* <MenuChat menuChats={rooms} /> */}
         </div>

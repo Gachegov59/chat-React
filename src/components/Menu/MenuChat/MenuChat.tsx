@@ -1,28 +1,26 @@
 import { FC } from 'react';
-import { IMenuChat } from '../../../interfaces/IMenu';
+import { IRoom } from '../../../interfaces/IMenu';
 import MenuChatItem from './MenuChatItem';
 import styles from './MenuChat.module.scss';
 import Title, { TitleSize } from '@/components/UI/Title/Title';
 import BtnBase from '@/components/UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '@/components/UI/Button/BtnBase/IBtn';
 import { t } from 'i18next';
-import { Room } from '@/models/Room';
 import { useAppDispatch } from '@/hooks/redux';
 import { openCreateChatModal } from '@/store/modal/modalSlice';
 interface MenuChatProps {
-  menuChats: IMenuChat[] | null;
-  menuChats2: Room[] | null;
+  menuChats: IRoom[] | null;
 }
 
-const MenuChat: FC<MenuChatProps> = ({ menuChats, menuChats2 }) => {
+const MenuChat: FC<MenuChatProps> = ({ menuChats}) => {
   const dispatch = useAppDispatch();
 
   return (
     <>
-      {menuChats ? (
+      {(menuChats) ? (
         <>
-          {menuChats.map((chat) => (
-            <MenuChatItem key={chat.id} chat={chat} />
+          {menuChats?.map((chat) => (
+            <MenuChatItem key={chat._id} chat={chat} />
           ))}
         </>
       ) : (
@@ -38,11 +36,6 @@ const MenuChat: FC<MenuChatProps> = ({ menuChats, menuChats2 }) => {
           />
         </div>
       )}
-      
-      {menuChats2 && menuChats2.map((chat) => (
-        <div key={chat._id}>{chat.name}</div>
-      ))}
-
     </>
   );
 };

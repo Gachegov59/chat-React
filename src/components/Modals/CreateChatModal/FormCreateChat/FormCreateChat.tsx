@@ -4,7 +4,8 @@ import { SubmitHandler } from 'react-hook-form';
 import { FormCreateChatFields } from './FormCreateChatConfig';
 import { t } from 'i18next';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { createRoom } from '@/store/room/roomActions';
+import { createRoom, getRoomsForUser } from '@/store/room/roomActions';
+import { closeCreateChatModal } from '@/store/modal/modalSlice';
 
 interface FormCreateChatProps {}
 export type FormCreateChatFormValues = {
@@ -20,7 +21,12 @@ const FormCreateChat: FC<FormCreateChatProps> = () => {
     console.log(userId);
 
     if (!userId) return;
-    dispatch(createRoom({ name: data.name, userId }));
+    dispatch(createRoom({ name: data.name, userId }))
+      .unwrap()
+      .then(() => {
+        dispatch(getRoomsForUser(userId));
+      });
+    dispatch(closeCreateChatModal());
   };
 
   return (
