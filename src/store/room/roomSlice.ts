@@ -6,12 +6,17 @@ const initialState: RoomState = {
   rooms: [],
   isLoading: false,
   error: null,
+  activeRoom: null,
 };
 
 const roomSlice = createSlice({
   name: 'room',
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveRoom: (state, action: PayloadAction<Room>) => {
+      state.activeRoom = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // createRoom
@@ -82,5 +87,5 @@ const roomSlice = createSlice({
       });
   },
 });
-
+export const { setActiveRoom } = roomSlice.actions;
 export default roomSlice.reducer;

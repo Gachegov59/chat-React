@@ -3,6 +3,8 @@ import styles from './MenuChatItem.module.scss';
 import AvatarChatBase from '@/components/UI/Avatar/AvatarBase/AvatarBase';
 import dayjs from 'dayjs';
 import { IRoom } from '@/interfaces/IMenu';
+import { useAppDispatch } from '@/hooks/redux';
+import { setActiveRoom } from '@/store/room/roomSlice';
 interface MenuChatProps {
   chat: IRoom;
 }
@@ -14,7 +16,7 @@ const getAvatarSize = (width: number): number => {
 
 const MenuChatItem: FC<MenuChatProps> = ({ chat }) => {
   const [avatarSize, setAvatarSize] = useState<number>(getAvatarSize(window.innerWidth));
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const handleResize = () => {
       setAvatarSize(getAvatarSize(window.innerWidth));
@@ -25,9 +27,13 @@ const MenuChatItem: FC<MenuChatProps> = ({ chat }) => {
     };
   });
 
+  const handleClick = () => {
+    dispatch(setActiveRoom(chat));
+  };
+
   return (
     <>
-      <div key={chat._id} className={styles['menuChat-item']}>
+      <div key={chat._id} className={styles['menuChat-item']} onClick={handleClick}>
         <div className={styles['menuChat-item__avatar']}>
           {chat.image && <AvatarChatBase image={chat.image} size={avatarSize} imageTitle={chat.name} />}
           {chat.users.length < 2 ? (

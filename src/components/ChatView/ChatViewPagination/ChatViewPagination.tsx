@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './ChatViewPagination.module.scss';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import { ICurrentChat } from '@/interfaces/IChat';
@@ -8,30 +8,28 @@ import BtnBase from '@/components/UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '@/components/UI/Button/BtnBase/IBtn';
 import { t } from 'i18next';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { closeCreateChatModal, openCreateChatModal } from '@/store/modal/modalSlice';
+import { openCreateChatModal } from '@/store/modal/modalSlice';
+import { IRoom } from '@/interfaces/IMenu';
 
 interface ChatViewPaginationProps {
-  currentChat: ICurrentChat | null;
+  // currentChat: ICurrentChat | null;
+  currentChat: IRoom | null;
 }
 
 const ChatViewPagination: FC<ChatViewPaginationProps> = ({ currentChat }) => {
-  const { isCreateChatOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
+
   const handleOpenCreateChatModal = () => {
     dispatch(openCreateChatModal());
   };
 
-  // const handleCloseCreateChatModal = () => {
-  //   dispatch(closeCreateChatModal());
-  // };
-  
   return (
     <div className={styles['chat-view-pagination']}>
       {currentChat ? (
         <>
-          {chatMessagesAPI.map((message) => (
+          {/* {chatMessagesAPI.map((message) => (
             <ChatMessage key={message.messageId} chatMessage={message} user={message.user} />
-          ))}
+          ))} */}
         </>
       ) : (
         <div className={styles['chat-placeholder']}>
@@ -39,7 +37,12 @@ const ChatViewPagination: FC<ChatViewPaginationProps> = ({ currentChat }) => {
             <span className="text-light-blue">{t('ChatView.chat-placeholder')}</span>
             <div className="text-white mt-2">{t('ChatView.or-create-new')}</div>
           </Title>
-          <BtnBase clickBtn={handleOpenCreateChatModal} className="text-xl" btnText={t('ChatView.create-room')} btnColor={IBtnColors.Blue} />
+          <BtnBase
+            clickBtn={handleOpenCreateChatModal}
+            className="text-xl"
+            btnText={t('ChatView.create-room')}
+            btnColor={IBtnColors.Blue}
+          />
         </div>
       )}
     </div>
@@ -50,4 +53,3 @@ export default ChatViewPagination;
 function dispatch(arg0: any) {
   throw new Error('Function not implemented.');
 }
-

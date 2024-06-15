@@ -12,7 +12,7 @@ export interface Room {
   type?: 'user' | 'group';
   counter?: number;
   lastMessage?: LastMessage;
-  settings: {
+  settings?: {
     allowGuests: boolean;
     _id: string;
   };
@@ -32,4 +32,5 @@ export interface RoomState {
   rooms: Room[];
   isLoading: boolean;
   error: string | null;
+  activeRoom: null | Room;
 }

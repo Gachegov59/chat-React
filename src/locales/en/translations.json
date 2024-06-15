@@ -6,7 +6,9 @@
     "create-room": "Create chat",
     "placeholder": "Enter your message..",
     "send": "Send",
-    "invite": "Invite"
+    "invite": "Invite",
+    "delete": "Delete",
+    "leave": "Leave"
   },
   "ChatMenu": {
     "chat-placeholder": "you don't have any rooms, create a new one 🎉",

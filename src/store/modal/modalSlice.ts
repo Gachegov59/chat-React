@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface ModalState {
   isInviteModalOpen: boolean;
   isCreateChatOpen: boolean;
+  isConfirmationModalOpen: boolean;
 }
 
 const initialState: ModalState = {
   isInviteModalOpen: false,
   isCreateChatOpen: false,
+  isConfirmationModalOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -26,8 +28,21 @@ const modalSlice = createSlice({
     closeCreateChatModal: (state) => {
       state.isCreateChatOpen = false;
     },
+    openConfirmationModal: (state) => {
+      state.isConfirmationModalOpen = true;
+    },
+    closeConfirmationModal: (state) => {
+      state.isConfirmationModalOpen = false;
+    },
   },
 });
 
-export const { openInviteModal, closeInviteModal, openCreateChatModal, closeCreateChatModal } = modalSlice.actions;
+export const {
+  openInviteModal,
+  closeInviteModal,
+  openCreateChatModal,
+  closeCreateChatModal,
+  openConfirmationModal,
+  closeConfirmationModal,
+} = modalSlice.actions;
 export default modalSlice.reducer;

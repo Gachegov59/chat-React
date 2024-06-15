@@ -4,6 +4,7 @@ interface LastMessage {
 }
 interface RoomSettings {
   allowGuests: boolean;
+  _id: string;
 }
 export interface IRoom {
   _id: string;
