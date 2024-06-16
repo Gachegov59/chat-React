@@ -2,12 +2,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth/authSlice';
 import roomReducer from './room/roomSlice';
+import messageReducer from './message/messageSlice'
 import modalReducer from './modal/modalSlice';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     room: roomReducer,
+    messages: messageReducer,
     modal: modalReducer,
   },
 });

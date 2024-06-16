@@ -15,7 +15,7 @@ const getAvatarSize = (width: number): number => {
 };
 
 const MenuChatItem: FC<MenuChatProps> = ({ menuChat }) => {
-  console.log('MenuChatItem render:', menuChat);
+  // console.log('MenuChatItem render:', menuChat);
 
   if (!menuChat) {
     return null; 

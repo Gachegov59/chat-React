@@ -1,8 +1,6 @@
-import { FC, useEffect, useState } from 'react';
-import styles from './index.module.scss';
+import { FC, useContext, useEffect, useState } from 'react';
+import styles from './ChatView.module.scss';
 import LoaderSpinner from '../UI/Loader/LoaderSpinner/LoaderSpinner';
-import { currentChatAPI } from './chatMock';
-import { ICurrentChat } from '../../interfaces/IChat';
 import ChatViewPagination from './ChatViewPagination/ChatViewPagination';
 import ChatInputPanel from './ChatInputPanel/ChatInputPanel';
 import { useTranslation } from 'react-i18next';
@@ -10,26 +8,17 @@ import InviteModal from '../Modals/InviteModal/InviteModal';
 import BtnBase from '../UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '../UI/Button/BtnBase/IBtn';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import ConfirmationModal from '../Modals/ConfirmationModal/ConfirmationModal';
 import { openConfirmationModal } from '@/store/modal/modalSlice';
 
 const ChatView: FC = () => {
   const [loaded] = useState<boolean>(true);
   const [isShowInviteModal, setIsShowInvitetModal] = useState<boolean>(false);
-  const [currentChat] = useState<ICurrentChat>(currentChatAPI);
-  const [message, setMessage] = useState<string>('');
   const { i18n } = useTranslation();
   const { activeRoom } = useAppSelector((state) => state.room);
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  const clickChatBtn = () => {
-    setMessage('');
-  };
-  useEffect(() => {
-    if (activeRoom) {
-      console.log('activeRoom---->', activeRoom);
-    }
-  }, [activeRoom]);
+
+
 
   const closeInviteModal = () => setIsShowInvitetModal(false);
 
@@ -78,7 +67,7 @@ const ChatView: FC = () => {
         )}
         <ChatViewPagination currentChat={activeRoom} />
       </div>
-      <ChatInputPanel message={message} setMessage={setMessage} clickChatBtn={clickChatBtn} />
+      <ChatInputPanel  clickChatBtn={() => {}} />
       <InviteModal chat={null} isShowInviteModal={isShowInviteModal} closeInviteModal={() => closeInviteModal()} />
     </div>
   );

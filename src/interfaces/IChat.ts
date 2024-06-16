@@ -1,4 +1,3 @@
-// import { IPagination } from "./IPagination";
 import { IUser } from './IUser';
 
 interface userMember {
@@ -9,9 +8,6 @@ interface userMember {
   status: boolean;
 }
 
-// export interface currentChatMessagesPagination extends IPagination {
-//   id: string;
-// }
 export interface ICurrentChat {
   chatId: string;
   type: 'personal' | 'group';
@@ -30,6 +26,8 @@ export interface IChatMessageItem {
   content: string;
   room: string;
   createdAt: Date;
+  user: IUser;
+
   // userId: string;
   // type: "text" | "image" | "audio" | "video";
   // content: string;
@@ -37,11 +35,7 @@ export interface IChatMessageItem {
   // isRead: boolean;
 }
 
-export interface IChatMessage {
-  user: IUser;
-  messageId: string;
-  userAvatar: string;
-  isMine: boolean;
-  date: string;
-  messages: IChatMessageItem[];
-}
+// export interface IChatMessage {
+//   user: IUser;
+//   messages: IChatMessageItem[];
+// }

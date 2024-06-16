@@ -16,12 +16,12 @@ const ChatInputPanel: FC<ChatInputPanelProps> = ({ clickChatBtn }) => {
   const { t } = useTranslation();
   const [message, setMessage] = useState<string>('');
   const socket = useContext(SocketContext);
-  const { roomId } = useParams<{ roomId: string }>();
   const { user } = useAppSelector((state) => state.auth);
   const { activeRoom } = useAppSelector((state) => state.room);
+  const roomId = activeRoom?._id;
   const sendMessage = () => {
     const sender = user.id;
-    const roomId = activeRoom?._id;
+
     if (!roomId || !message || !sender) {
       console.error('Invalid message data');
       return;
@@ -32,17 +32,23 @@ const ChatInputPanel: FC<ChatInputPanelProps> = ({ clickChatBtn }) => {
   };
 
   return (
-    <div className={styles['chat-inputPanel']}>
+    <div className={`${styles['chat-inputPanel']} ${!roomId ? styles._disabled : ''}`}>
       <div className={styles['chat-inputPanel__textarea']}>
         <textarea
           placeholder={t('ChatView.placeholder')}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          disabled={!activeRoom}
         />
         <div className={styles['chat-inputPanel__help']}>shift + enter</div>
       </div>
       <div className={styles['chat-inputPanel__btn']}>
-        <BtnBase btnText={t('ChatView.send')} btnColor={IBtnColors.Blue} clickBtn={sendMessage} />
+        <BtnBase
+          disabled={!activeRoom}
+          btnText={t('ChatView.send')}
+          btnColor={IBtnColors.Blue}
+          clickBtn={sendMessage}
+        />
       </div>
     </div>
   );

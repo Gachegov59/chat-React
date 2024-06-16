@@ -7,12 +7,20 @@ interface BtnBaseProps {
   btnColor: IBtnColors;
   children?: ReactNode;
   className?: string;
+  disabled?: boolean;
   clickBtn?: () => void;
 }
 
-const BtnBase: FC<BtnBaseProps> = ({className = '', btnText, btnColor = IBtnColors.Blue, children, clickBtn }) => {
+const BtnBase: FC<BtnBaseProps> = ({
+  className = '',
+  btnText,
+  btnColor = IBtnColors.Blue,
+  children,
+  clickBtn,
+  disabled = false,
+}) => {
   return (
-    <button className={`${styles.button} ${className} ${styles[btnColor]}`} onClick={clickBtn}>
+    <button disabled={disabled} className={`${styles.button} ${className} ${styles[btnColor]}`} onClick={clickBtn}>
       {children || btnText}
     </button>
   );

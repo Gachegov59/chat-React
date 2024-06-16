@@ -34,7 +34,7 @@ const ChatPlaceholder: FC = () => {
   );
 };
 const MenuChat: FC<MenuChatProps> = ({ menuChats }) => {
-  console.log('MenuChats:', menuChats);
+  // console.log('MenuChats:', menuChats);
   return (
     <ErrorBoundary>
       {menuChats && menuChats.length > 0 ? (

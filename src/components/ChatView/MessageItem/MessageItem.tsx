@@ -6,7 +6,6 @@ import { useAppSelector } from '@/hooks/redux';
 
 interface MessageItemProps {
   chatMessage: IChatMessageItem;
-  // isMine: boolean;
 }
 
 const MessageItem: FC<MessageItemProps> = ({ chatMessage}) => {

@@ -4,7 +4,10 @@
     padding: 0 10px;
     height: 54px;
     background: var(--dark);
-
+    &._disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
     textarea {
         background: none;
         border: none;
