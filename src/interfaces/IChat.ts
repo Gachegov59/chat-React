@@ -1,5 +1,5 @@
 // import { IPagination } from "./IPagination";
-import { IUser } from "./IUser";
+import { IUser } from './IUser';
 
 interface userMember {
   id: string;
@@ -14,7 +14,7 @@ interface userMember {
 // }
 export interface ICurrentChat {
   chatId: string;
-  type: "personal" | "group";
+  type: 'personal' | 'group';
   name: string;
   owner: {
     ownerId: string;
@@ -25,12 +25,16 @@ export interface ICurrentChat {
 }
 
 export interface IChatMessageItem {
-  id: string;
-  userId: string;
-  type: "text" | "image" | "audio" | "video";
+  _id: string;
+  sender: string;
   content: string;
-  date: string;
-  isRead: boolean;
+  room: string;
+  createdAt: Date;
+  // userId: string;
+  // type: "text" | "image" | "audio" | "video";
+  // content: string;
+  // date: string;
+  // isRead: boolean;
 }
 
 export interface IChatMessage {
