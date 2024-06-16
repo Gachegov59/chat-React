@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import styles from './ChatView.module.scss';
 import LoaderSpinner from '../UI/Loader/LoaderSpinner/LoaderSpinner';
 import ChatViewPagination from './ChatViewPagination/ChatViewPagination';
@@ -9,6 +9,7 @@ import BtnBase from '../UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '../UI/Button/BtnBase/IBtn';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { openConfirmationModal } from '@/store/modal/modalSlice';
+import ChatControls from './ChatControls/ChatControls';
 
 const ChatView: FC = () => {
   const [loaded] = useState<boolean>(true);
@@ -18,10 +19,7 @@ const ChatView: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
-
-
   const closeInviteModal = () => setIsShowInvitetModal(false);
-
   const handleOpenConfirmationModal = () => {
     dispatch(openConfirmationModal());
   };
@@ -31,31 +29,7 @@ const ChatView: FC = () => {
         {activeRoom && (
           <>
             <div className={styles['chat-view__top']}>{activeRoom.name}</div>
-            <div className={styles['chat-view__controls']}>
-              {user?.id === activeRoom.creator && (
-                <>
-                  <BtnBase
-                    btnText={i18n.t('ChatView.invite')}
-                    btnColor={IBtnColors.Blue}
-                    className="mx-1 bg-gray-800 outline outline-1 outline-teal-50"
-                    clickBtn={() => setIsShowInvitetModal(true)}
-                  />
-                  <BtnBase
-                    btnText={i18n.t('ChatView.delete')}
-                    className=" mx-1 bg-rose-950 outline outline-1 outline-teal-50"
-                    btnColor={IBtnColors.Blue}
-                    clickBtn={handleOpenConfirmationModal}
-                  />
-                </>
-              )}
-
-              <BtnBase
-                btnText={i18n.t('ChatView.leave')}
-                className="mx-1 bg-gray-800 outline outline-1 outline-teal-50"
-                btnColor={IBtnColors.Blue}
-                clickBtn={() => setIsShowInvitetModal(true)}
-              />
-            </div>
+            <ChatControls setIsShowInviteModal={setIsShowInvitetModal} />
           </>
         )}
       </div>
@@ -67,7 +41,7 @@ const ChatView: FC = () => {
         )}
         <ChatViewPagination currentChat={activeRoom} />
       </div>
-      <ChatInputPanel  clickChatBtn={() => {}} />
+      <ChatInputPanel clickChatBtn={() => {}} />
       <InviteModal chat={null} isShowInviteModal={isShowInviteModal} closeInviteModal={() => closeInviteModal()} />
     </div>
   );
