@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import RoomService from '@/services/RoomService';
-import { CreateRoomParams, InviteUserParams } from '@/models/Room';
+import { CreateRoomParams, CreateRoomResponse, InviteUserParams } from '@/models/Room';
 import { roomConfig } from '../config';
 
-export const createRoom = createAsyncThunk(
+export const createRoom = createAsyncThunk<CreateRoomResponse, CreateRoomParams>(
   roomConfig.room.createRoom,
-  async ({ name, userId }: CreateRoomParams, { rejectWithValue }) => {
+  async ({ name, userId }, { rejectWithValue }) => {
     try {
       const response = await RoomService.createRoom(name, userId);
       return response.data;
@@ -14,6 +14,7 @@ export const createRoom = createAsyncThunk(
     }
   }
 );
+
 
 export const inviteUserToRoom = createAsyncThunk(
   roomConfig.room.inviteUser,

@@ -3,10 +3,10 @@ import styles from './ChatMessage.module.scss';
 import { IChatMessageItem } from '@/interfaces/IChat';
 import MessageItem from '../MessageItem/MessageItem';
 import { useParams } from 'react-router-dom';
-import { SocketContext } from '@/main';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import LoaderSpinner from '@/components/UI/Loader/LoaderSpinner/LoaderSpinner';
 import { IUser } from '@/interfaces/IUser';
+import { SocketContext } from '@/socket';
 
 interface ChatMessageProps {
   chatMessage: IChatMessageItem;

@@ -1,11 +1,11 @@
-import { Room } from '@/models/Room';
+import { CreateRoomResponse, Room } from '@/models/Room';
 import axiosInstance from '../http';
 import { AxiosResponse } from 'axios';
 
 const API_URL = 'http://localhost:5000/api/room';
 
 export default class RoomService {
-  static async createRoom(name: string, userId: string): Promise<AxiosResponse<Room>> {
+  static async createRoom(name: string, userId: string): Promise<AxiosResponse<CreateRoomResponse>> {
     return axiosInstance.post(`${API_URL}/create`, { name, userId });
   }
 

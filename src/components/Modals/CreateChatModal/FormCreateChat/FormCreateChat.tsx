@@ -6,6 +6,8 @@ import { t } from 'i18next';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { createRoom, getRoomsForUser } from '@/store/room/roomActions';
 import { closeCreateChatModal } from '@/store/modal/modalSlice';
+import { setActiveRoom } from '@/store/room/roomSlice';
+import { Room } from '@/models/Room';
 
 interface FormCreateChatProps {}
 export type FormCreateChatFormValues = {
@@ -20,8 +22,14 @@ const FormCreateChat: FC<FormCreateChatProps> = () => {
     if (!userId) return;
 
     try {
-      await dispatch(createRoom({ name: data.name, userId })).unwrap();
-      await dispatch(getRoomsForUser(userId)).unwrap();
+      const newRoom = await dispatch(createRoom({ name: data.name, userId })).unwrap();
+      console.log('🚀 ~ file: FormCreateChat.tsx:FormCreateChatHandler ~ data:', newRoom);
+      if (newRoom && newRoom.room) {
+        dispatch(setActiveRoom(newRoom.room));
+      }
+
+      await dispatch(getRoomsForUser(userId));
+
       dispatch(closeCreateChatModal());
     } catch (error) {
       console.error('Failed to create room:', error);

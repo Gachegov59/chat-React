@@ -22,6 +22,9 @@ export interface CreateRoomParams {
   name: string;
   userId: string;
 }
+export interface CreateRoomResponse {
+  room: Room;
+}
 
 export interface InviteUserParams {
   roomId: string;

@@ -3,36 +3,33 @@ import styles from './ChatInputPanel.module.scss';
 import BtnBase from '@/components/UI/Button/BtnBase/BtnBase';
 import { IBtnColors } from '@/components/UI/Button/BtnBase/IBtn';
 import { useTranslation } from 'react-i18next';
-import { SocketContext } from '@/main';
-import { useParams } from 'react-router-dom';
 import { useAppSelector } from '@/hooks/redux';
-interface ChatInputPanelProps {
-  // message: string;
-  // setMessage: (message: string) => void;
-  clickChatBtn: () => void;
-}
+import { SocketContext } from '@/socket';
+interface ChatInputPanelProps {}
 
-const ChatInputPanel: FC<ChatInputPanelProps> = ({ clickChatBtn }) => {
+const ChatInputPanel: FC<ChatInputPanelProps> = () => {
   const { t } = useTranslation();
   const [message, setMessage] = useState<string>('');
   const socket = useContext(SocketContext);
   const { user } = useAppSelector((state) => state.auth);
   const { activeRoom } = useAppSelector((state) => state.room);
-  const roomId = activeRoom?._id;
+  const activeRoomId = activeRoom?._id;
+
   const sendMessage = () => {
     const sender = user.id;
+    console.log('🚀 ~ sendMessage ~ sender:', sender);
 
-    if (!roomId || !message || !sender) {
+    if (!activeRoomId || !message || !sender) {
       console.error('Invalid message data');
       return;
     }
 
-    socket.emit('chatMessage', { roomId, message, sender });
+    socket.emit('chatMessage', { activeRoomId, message, sender });
     setMessage('');
   };
 
   return (
-    <div className={`${styles['chat-inputPanel']} ${!roomId ? styles._disabled : ''}`}>
+    <div className={`${styles['chat-inputPanel']} ${!activeRoomId ? styles._disabled : ''}`}>
       <div className={styles['chat-inputPanel__textarea']}>
         <textarea
           placeholder={t('ChatView.placeholder')}
